@@ -31,5 +31,11 @@ namespace DXApplication1
         {
 
         }
+
+        private void barButtonItem2_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            add_new ss = new add_new();
+            ss.ShowDialog();
+        }
     }
 }
