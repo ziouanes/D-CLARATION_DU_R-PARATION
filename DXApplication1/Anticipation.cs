@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace DXApplication1
 {
-    class Anticipation
+   public class Anticipation
     {
-        int id;
-        string name;
-        string Marque;
-        string Immatriculation;
-        int last_Kilometrage;
+        public int id { get; set; }
+        public int id_v { get; set; }
+        public string Marque { get; set; }
+        public string Immatriculation { get; set; }
+        public int KILOMÉTRAGE_V { get; set; }
+        public DateTime Date_V { get; set; }
+        public int Taux { get; set; }
     }
 }

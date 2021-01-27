@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace DXApplication1
 {
-    class Reaparation
+    public class Reaparation 
     {
-        int id;
-        string name;
-        string Marque;
-        string Immatriculation;
-        string Carburant;
-        DateTime date;
-        string first_kilometrage;
+        public int id { get; set; }
+        public string Nom { get; set; }
+        public int id_vehecule { get; set; }
+        public string Marque { get; set; }
+        public string Immatriculation { get; set; }
+        public string Carburant { get; set; }
+        public DateTime Date { get; set; }
+        public int kilometrage { get; set; }
 
     }
 }
