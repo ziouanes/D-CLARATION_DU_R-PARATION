@@ -9,7 +9,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using System.Data.SqlClient;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using DevExpress.XtraGrid.Views.BandedGrid;
+using Microsoft.Win32;
+
+
 using Dapper;
+using DevExpress.Xpo;
 
 namespace DXApplication1
 {
@@ -39,12 +45,22 @@ namespace DXApplication1
         {
             add_new ss = new add_new();
             ss.ShowDialog();
+            select_new_Data();
+            select_old_Data();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //run startup
+            RegistryKey reg = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            reg.SetValue("Declaration du Reparation", Application.ExecutablePath.ToString());
+
             select_new_Data();
             select_old_Data();
+            timer1.Start();
+
+
+
         }
 
         private void select_new_Data()
@@ -72,7 +88,7 @@ namespace DXApplication1
                 if (sql_con.State == ConnectionState.Closed)
                     sql_con.Open();
 
-                string query = $"select r.id ,r.[nom] as 'Nom',r.[Carburant] as Carburant ,r.[first_kilometrage] as kilometrage,v.Marque as Marque,v.matricule as Immatriculation , v.id as id_vehecule ,r.[_date] as 'Date' from [Reaparation] r inner join vehicules v on r.vehecule = v.id";
+                string query = $"select r.[n/] as numero , r.id ,r.[nom] as 'Nom',r.[Carburant] as Carburant ,r.[first_kilometrage] as kilometrage,v.Marque as Marque,v.matricule as Immatriculation , v.id as id_vehecule ,r.[_date] as 'Date' from [Reaparation] r inner join vehicules v on r.vehecule = v.id order by r.[_date] DESC";
 
                 reaparationBindingSource.DataSource = sql_con.Query<Reaparation>(query, commandType: CommandType.Text);
 
@@ -89,8 +105,8 @@ namespace DXApplication1
         {
             if (e.Button != MouseButtons.Right) return;
             var rowM = gridView1.FocusedRowHandle;
-            var focusRowView = (DataRowView)gridView1.GetFocusedRow();
-            if (focusRowView == null || focusRowView.IsNew) return;
+
+          
             if (rowM >= 0)
                 popupMenu1.ShowPopup(barManager1, new Point(MousePosition.X, MousePosition.Y));
             else
@@ -106,12 +122,12 @@ namespace DXApplication1
             //string value = gridView1.GetFocusedDataRow()["id"].ToString();
             //update_deplacement update = new update_deplacement(value);
             //update.ShowDialog();
+
         }
 
         private void ajouter_car_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            toastNotificationsManager1.ShowNotification("c19f92f7-3e15-4e42-a3cc-f14b50caf736");
-
+            // toastNotificationsManager1.ShowNotification("c19f92f7-3e15-4e42-a3cc-f14b50caf736");
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)
@@ -141,6 +157,173 @@ namespace DXApplication1
             {
                 this.ShowInTaskbar = true;
                 notifyIcon1.Visible = false;
+            }
+        }
+
+        private void gridView2_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Right) return;
+            var rowM = gridView2.FocusedRowHandle;
+
+         
+            if (rowM >= 0)
+                popupMenu2.ShowPopup(barManager1, new Point(MousePosition.X, MousePosition.Y));
+            else
+                popupMenu2.HidePopup();
+        }
+
+        private void gridView1_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+           
+        }
+
+        private void barButtonItem6_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+            //ovrire nouveau
+
+            DataRow red = gridView1.GetFocusedDataRow();
+            
+                var row = gridView1.FocusedRowHandle;
+                string cellidV;
+                DateTime cell_date;
+                 string cellMarque;
+                string cell_kelo;
+            string cellImmatriculation;
+
+            cellidV = gridView1.GetRowCellValue(row, "id_v").ToString();
+            cellMarque = gridView1.GetRowCellValue(row, "Marque").ToString();
+            cellImmatriculation = gridView1.GetRowCellValue(row, "Immatriculation").ToString();
+            cell_date = Convert.ToDateTime(gridView1.GetRowCellValue(row, "Date_V"));
+            cell_kelo = gridView1.GetRowCellValue(row, "KILOMÉTRAGE_V").ToString();
+
+
+
+            add_new add_New1 = new add_new(cell_date, cellidV,cellMarque,cellImmatriculation, cell_kelo);
+            add_New1.ShowDialog();
+            select_new_Data();
+            select_old_Data();
+
+
+
+
+
+        }
+
+        private void barButtonItem8_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            //imprimer 
+
+            var row2 = gridView2.FocusedRowHandle;
+            string cellid;
+            cellid = gridView2.GetRowCellValue(row2, "id").ToString();
+
+            if (Program.sql_con.State == ConnectionState.Closed)
+                Program.sql_con.Open();
+            string query = $" select  [_description] from [dbo].[descriptions] where [id_Reaparation] = { cellid}";
+            List<description> descriptions = Program.sql_con.Query<description>(query, commandType: CommandType.Text).ToList();
+            using (printfrm frm = new printfrm())
+            {
+                frm.PrintInvoice(int.Parse(cellid), descriptions);
+                frm.WindowState = FormWindowState.Maximized;
+                frm.ShowDialog();
+
+            }
+
+        }
+
+        private void delete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var row2 = gridView2.FocusedRowHandle;
+            string cellid;
+            cellid = gridView2.GetRowCellValue(row2, "id").ToString();
+
+           
+
+
+
+            using (SqlCommand deleteCommand = new SqlCommand("DELETE FROM Reaparation WHERE id = @id", Program.sql_con))
+            {
+
+
+                if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
+
+                deleteCommand.Parameters.AddWithValue("@id", int.Parse(cellid));
+
+                deleteCommand.ExecuteNonQuery();
+
+
+
+            }
+            gridView2.DeleteRow(row2);
+            
+
+
+        }
+
+        private void update_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+            var row2 = gridView2.FocusedRowHandle;
+            string cellid;          
+            string cellidV;
+            DateTime cell_date;
+            string cellMarque;
+            string cell_kelo;
+            string cellImmatriculation;
+            string cellNom;
+            string cellCarb;
+            string cellnumero;
+
+
+            cellid = gridView2.GetRowCellValue(row2, "id").ToString();
+            cellidV = gridView2.GetRowCellValue(row2, "id_vehecule").ToString();
+            cellMarque = gridView2.GetRowCellValue(row2, "Marque").ToString();
+            cellImmatriculation = gridView2.GetRowCellValue(row2, "Immatriculation").ToString();
+            cell_date = Convert.ToDateTime(gridView2.GetRowCellValue(row2, "Date"));
+            cell_kelo = gridView2.GetRowCellValue(row2, "kilometrage").ToString();
+            cellNom = gridView2.GetRowCellValue(row2, "Nom").ToString();
+            cellCarb = gridView2.GetRowCellValue(row2, "Carburant").ToString();
+            cellnumero = gridView2.GetRowCellValue(row2, "numero").ToString();
+
+
+
+
+            add_new add_New2 = new add_new(cellnumero,int.Parse(cellid),int.Parse( cellidV), cellMarque , cellImmatriculation , cell_date  , cell_kelo, cellNom , cellCarb);
+            add_New2.ShowDialog();
+            select_new_Data();
+            select_old_Data();
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+            select_new_Data();
+            select_old_Data();
+
+            if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
+
+            {
+                SqlCommand cmd = Program.sql_con.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+
+                cmd.CommandText = "SELECT * from NOUVEAU where [Taux] > = 95";
+                DataTable table = new DataTable();
+                cmd.ExecuteNonQuery();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(table);
+                foreach (DataRow row in table.Rows)
+                {
+                    //listBoxControl1.Items.Add(row["_description"].ToString());
+                    //MessageBox.Show("test");
+                    toastNotificationsManager1.ShowNotification("c19f92f7-3e15-4e42-a3cc-f14b50caf736");
+
+                }
+
+
+
+
             }
         }
     }

@@ -9,6 +9,7 @@ namespace DXApplication1
     public class Reaparation 
     {
         public int id { get; set; }
+        public string numero { get; set; }
         public string Nom { get; set; }
         public int id_vehecule { get; set; }
         public string Marque { get; set; }

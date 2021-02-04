@@ -63,32 +63,44 @@
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.anticipationBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colMarque = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colImmatriculation = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colKILOMÉTRAGE_V = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDate_V = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTaux = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemProgressBar1 = new DevExpress.XtraEditors.Repository.RepositoryItemProgressBar();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.customersNavigationPage = new DevExpress.XtraBars.Navigation.NavigationPage();
             this.gridControl2 = new DevExpress.XtraGrid.GridControl();
             this.reaparationBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colNom = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colMarque1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colImmatriculation1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCarburant = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colfirst_kilometrage = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.barButtonItem5 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonajouter = new DevExpress.XtraBars.BarButtonItem();
+            this.update = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem8 = new DevExpress.XtraBars.BarButtonItem();
+            this.delete = new DevExpress.XtraBars.BarButtonItem();
             this.behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);
             this.toastNotificationsManager1 = new DevExpress.XtraBars.ToastNotifications.ToastNotificationsManager(this.components);
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.popupMenu2 = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.officeNavigationBar)).BeginInit();
@@ -106,10 +118,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.reaparationBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.toastNotificationsManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenu2)).BeginInit();
             this.SuspendLayout();
             // 
             // ribbonControl
@@ -230,7 +243,7 @@
             // 
             // barButtonItem4
             // 
-            this.barButtonItem4.Caption = "ajouter_";
+            this.barButtonItem4.Caption = "ajouter NOUVEAU";
             this.barButtonItem4.Id = 52;
             this.barButtonItem4.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem4.ImageOptions.Image")));
             this.barButtonItem4.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem4.ImageOptions.LargeImage")));
@@ -391,15 +404,24 @@
             // gridView1
             // 
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn1,
             this.colMarque,
             this.colImmatriculation,
             this.colKILOMÉTRAGE_V,
             this.colDate_V,
-            this.colTaux});
+            this.colTaux,
+            this.gridColumn2});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.Editable = false;
+            this.gridView1.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gridView1_PopupMenuShowing);
             this.gridView1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gridView1_MouseUp);
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "id";
+            this.gridColumn1.FieldName = "id";
+            this.gridColumn1.Name = "gridColumn1";
             // 
             // colMarque
             // 
@@ -417,6 +439,7 @@
             // 
             // colKILOMÉTRAGE_V
             // 
+            this.colKILOMÉTRAGE_V.Caption = "KILOMÉTRAGE";
             this.colKILOMÉTRAGE_V.FieldName = "KILOMÉTRAGE_V";
             this.colKILOMÉTRAGE_V.Name = "colKILOMÉTRAGE_V";
             this.colKILOMÉTRAGE_V.Visible = true;
@@ -424,6 +447,7 @@
             // 
             // colDate_V
             // 
+            this.colDate_V.Caption = "Date";
             this.colDate_V.FieldName = "Date_V";
             this.colDate_V.Name = "colDate_V";
             this.colDate_V.Visible = true;
@@ -443,6 +467,12 @@
             this.repositoryItemProgressBar1.Name = "repositoryItemProgressBar1";
             this.repositoryItemProgressBar1.StartColor = System.Drawing.Color.Lime;
             this.repositoryItemProgressBar1.TextOrientation = DevExpress.Utils.Drawing.TextOrientation.Horizontal;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "gridColumn2";
+            this.gridColumn2.FieldName = "id_v";
+            this.gridColumn2.Name = "gridColumn2";
             // 
             // customersNavigationPage
             // 
@@ -470,67 +500,89 @@
             // gridView2
             // 
             this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn5,
             this.colNom,
             this.colMarque1,
             this.colImmatriculation1,
             this.colCarburant,
             this.colDate,
-            this.colfirst_kilometrage});
+            this.colfirst_kilometrage,
+            this.gridColumn3,
+            this.gridColumn4});
             this.gridView2.GridControl = this.gridControl2;
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsBehavior.Editable = false;
+            this.gridView2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gridView2_MouseUp);
+            // 
+            // gridColumn5
+            // 
+            this.gridColumn5.Caption = "Numero";
+            this.gridColumn5.FieldName = "numero";
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 0;
             // 
             // colNom
             // 
             this.colNom.FieldName = "Nom";
             this.colNom.Name = "colNom";
             this.colNom.Visible = true;
-            this.colNom.VisibleIndex = 0;
+            this.colNom.VisibleIndex = 1;
             // 
             // colMarque1
             // 
             this.colMarque1.FieldName = "Marque";
             this.colMarque1.Name = "colMarque1";
             this.colMarque1.Visible = true;
-            this.colMarque1.VisibleIndex = 1;
+            this.colMarque1.VisibleIndex = 2;
             // 
             // colImmatriculation1
             // 
             this.colImmatriculation1.FieldName = "Immatriculation";
             this.colImmatriculation1.Name = "colImmatriculation1";
             this.colImmatriculation1.Visible = true;
-            this.colImmatriculation1.VisibleIndex = 2;
+            this.colImmatriculation1.VisibleIndex = 3;
             // 
             // colCarburant
             // 
             this.colCarburant.FieldName = "Carburant";
             this.colCarburant.Name = "colCarburant";
             this.colCarburant.Visible = true;
-            this.colCarburant.VisibleIndex = 3;
+            this.colCarburant.VisibleIndex = 4;
             // 
             // colDate
             // 
             this.colDate.FieldName = "Date";
             this.colDate.Name = "colDate";
             this.colDate.Visible = true;
-            this.colDate.VisibleIndex = 4;
+            this.colDate.VisibleIndex = 5;
             // 
             // colfirst_kilometrage
             // 
-            this.colfirst_kilometrage.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.colfirst_kilometrage.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.colfirst_kilometrage.AppearanceCell.Options.UseFont = true;
             this.colfirst_kilometrage.AppearanceCell.Options.UseTextOptions = true;
             this.colfirst_kilometrage.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.colfirst_kilometrage.FieldName = "kilometrage";
             this.colfirst_kilometrage.Name = "colfirst_kilometrage";
             this.colfirst_kilometrage.Visible = true;
-            this.colfirst_kilometrage.VisibleIndex = 5;
+            this.colfirst_kilometrage.VisibleIndex = 6;
             // 
-            // popupMenu1
+            // gridColumn3
             // 
-            this.popupMenu1.ItemLinks.Add(this.barButtonItem4);
-            this.popupMenu1.Name = "popupMenu1";
-            this.popupMenu1.Ribbon = this.ribbonControl;
+            this.gridColumn3.Caption = "id";
+            this.gridColumn3.FieldName = "id";
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 7;
+            // 
+            // gridColumn4
+            // 
+            this.gridColumn4.Caption = "id_V";
+            this.gridColumn4.FieldName = "id_vehecule";
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 8;
             // 
             // barManager1
             // 
@@ -539,6 +591,13 @@
             this.barManager1.DockControls.Add(this.barDockControlLeft);
             this.barManager1.DockControls.Add(this.barDockControlRight);
             this.barManager1.Form = this;
+            this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
+            this.barButtonItem5,
+            this.barButtonajouter,
+            this.update,
+            this.barButtonItem8,
+            this.delete});
+            this.barManager1.MaxItemId = 5;
             this.barManager1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barManager1_ItemClick);
             // 
             // barDockControlTop
@@ -573,13 +632,53 @@
             this.barDockControlRight.Manager = this.barManager1;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 599);
             // 
+            // barButtonItem5
+            // 
+            this.barButtonItem5.Caption = "barButtonItem5";
+            this.barButtonItem5.Id = 0;
+            this.barButtonItem5.Name = "barButtonItem5";
+            // 
+            // barButtonajouter
+            // 
+            this.barButtonajouter.Caption = "ajouter NOUVEAU";
+            this.barButtonajouter.Id = 1;
+            this.barButtonajouter.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonajouter.ImageOptions.Image")));
+            this.barButtonajouter.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonajouter.ImageOptions.LargeImage")));
+            this.barButtonajouter.Name = "barButtonajouter";
+            this.barButtonajouter.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem6_ItemClick);
+            // 
+            // update
+            // 
+            this.update.Caption = "Modifier";
+            this.update.Id = 2;
+            this.update.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("update.ImageOptions.Image")));
+            this.update.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("update.ImageOptions.LargeImage")));
+            this.update.Name = "update";
+            this.update.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.update_ItemClick);
+            // 
+            // barButtonItem8
+            // 
+            this.barButtonItem8.Caption = "Imprimer";
+            this.barButtonItem8.Id = 3;
+            this.barButtonItem8.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem8.ImageOptions.Image")));
+            this.barButtonItem8.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem8.ImageOptions.LargeImage")));
+            this.barButtonItem8.Name = "barButtonItem8";
+            this.barButtonItem8.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem8_ItemClick);
+            // 
+            // delete
+            // 
+            this.delete.Caption = "Supprimer";
+            this.delete.Id = 4;
+            this.delete.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("delete.ImageOptions.Image")));
+            this.delete.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("delete.ImageOptions.LargeImage")));
+            this.delete.Name = "delete";
+            this.delete.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.delete_ItemClick);
+            // 
             // toastNotificationsManager1
             // 
             this.toastNotificationsManager1.ApplicationId = "df05c7e4-eeb3-4872-a22b-8d68c39e912e";
             this.toastNotificationsManager1.Notifications.AddRange(new DevExpress.XtraBars.ToastNotifications.IToastNotificationProperties[] {
-            new DevExpress.XtraBars.ToastNotifications.ToastNotification("c19f92f7-3e15-4e42-a3cc-f14b50caf736", null, "Pellentesque lacinia tellus eget volutpat", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor i" +
-                    "ncididunt ut labore et dolore magna aliqua.", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor i" +
-                    "ncididunt ut labore et dolore magna aliqua.", DevExpress.XtraBars.ToastNotifications.ToastNotificationTemplate.Text01)});
+            new DevExpress.XtraBars.ToastNotifications.ToastNotification("c19f92f7-3e15-4e42-a3cc-f14b50caf736", ((System.Drawing.Image)(resources.GetObject("toastNotificationsManager1.Notifications"))), "vidanges ", "vidanges ", "", DevExpress.XtraBars.ToastNotifications.ToastNotificationTemplate.ImageAndText01)});
             // 
             // notifyIcon1
             // 
@@ -587,6 +686,27 @@
             this.notifyIcon1.Text = "application du réparation";
             this.notifyIcon1.Visible = true;
             this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
+            // 
+            // popupMenu1
+            // 
+            this.popupMenu1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonajouter)});
+            this.popupMenu1.Manager = this.barManager1;
+            this.popupMenu1.Name = "popupMenu1";
+            // 
+            // popupMenu2
+            // 
+            this.popupMenu2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.update),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem8),
+            new DevExpress.XtraBars.LinkPersistInfo(this.delete)});
+            this.popupMenu2.Manager = this.barManager1;
+            this.popupMenu2.Name = "popupMenu2";
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 10000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 
@@ -626,10 +746,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.reaparationBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.toastNotificationsManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenu2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -677,7 +798,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colTaux;
         private DevExpress.XtraEditors.Repository.RepositoryItemProgressBar repositoryItemProgressBar1;
         private DevExpress.XtraBars.BarButtonItem barButtonItem4;
-        private DevExpress.XtraBars.PopupMenu popupMenu1;
         private DevExpress.XtraBars.BarManager barManager1;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
@@ -695,5 +815,18 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
         private DevExpress.XtraBars.ToastNotifications.ToastNotificationsManager toastNotificationsManager1;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem5;
+        private DevExpress.XtraBars.BarButtonItem barButtonajouter;
+        private DevExpress.XtraBars.PopupMenu popupMenu1;
+        private DevExpress.XtraBars.BarButtonItem update;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem8;
+        private DevExpress.XtraBars.BarButtonItem delete;
+        private DevExpress.XtraBars.PopupMenu popupMenu2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private System.Windows.Forms.Timer timer1;
     }
 }
