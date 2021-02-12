@@ -46,10 +46,17 @@
             this.barSubItem2 = new DevExpress.XtraBars.BarSubItem();
             this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
             this.ajouter_car = new DevExpress.XtraBars.BarButtonItem();
+            this.links = new DevExpress.XtraBars.BarLinkContainerItem();
+            this.barButtonItem6 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem7 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem9 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem10 = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroupNavigation = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
@@ -84,6 +91,7 @@
             this.colfirst_kilometrage = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
@@ -144,9 +152,14 @@
             this.barSubItem1,
             this.barSubItem2,
             this.barButtonItem4,
-            this.ajouter_car});
+            this.ajouter_car,
+            this.links,
+            this.barButtonItem6,
+            this.barButtonItem7,
+            this.barButtonItem9,
+            this.barButtonItem10});
             this.ribbonControl.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl.MaxItemId = 54;
+            this.ribbonControl.MaxItemId = 59;
             this.ribbonControl.MdiMergeStyle = DevExpress.XtraBars.Ribbon.RibbonMdiMergeStyle.Always;
             this.ribbonControl.Name = "ribbonControl";
             this.ribbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -258,12 +271,60 @@
             this.ajouter_car.Name = "ajouter_car";
             this.ajouter_car.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.ajouter_car_ItemClick);
             // 
+            // links
+            // 
+            this.links.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
+            this.links.Caption = "Source";
+            this.links.Id = 54;
+            this.links.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("links.ImageOptions.Image")));
+            this.links.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("links.ImageOptions.LargeImage")));
+            this.links.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem6),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem7)});
+            this.links.Name = "links";
+            // 
+            // barButtonItem6
+            // 
+            this.barButtonItem6.Caption = "Github";
+            this.barButtonItem6.Id = 55;
+            this.barButtonItem6.ImageOptions.Image = global::DXApplication1.Properties.Resources.icons8_github_32;
+            this.barButtonItem6.Name = "barButtonItem6";
+            this.barButtonItem6.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem6_ItemClick_1);
+            // 
+            // barButtonItem7
+            // 
+            this.barButtonItem7.Caption = "Email";
+            this.barButtonItem7.Id = 56;
+            this.barButtonItem7.ImageOptions.Image = global::DXApplication1.Properties.Resources.icons8_email_32;
+            this.barButtonItem7.Name = "barButtonItem7";
+            this.barButtonItem7.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem7_ItemClick);
+            // 
+            // barButtonItem9
+            // 
+            this.barButtonItem9.Caption = "Registre";
+            this.barButtonItem9.Id = 57;
+            this.barButtonItem9.ImageOptions.Image = global::DXApplication1.Properties.Resources.icons8_login_as_user_641;
+            this.barButtonItem9.Name = "barButtonItem9";
+            this.barButtonItem9.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.barButtonItem9.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem9_ItemClick);
+            // 
+            // barButtonItem10
+            // 
+            this.barButtonItem10.Caption = "facture de Reparation";
+            this.barButtonItem10.Id = 58;
+            this.barButtonItem10.ImageOptions.Image = global::DXApplication1.Properties.Resources.icons8_receipt_32;
+            this.barButtonItem10.Name = "barButtonItem10";
+            this.barButtonItem10.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.barButtonItem10.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem10_ItemClick);
+            // 
             // ribbonPage
             // 
             this.ribbonPage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.ribbonPageGroupNavigation,
             this.ribbonPageGroup1,
-            this.ribbonPageGroup2});
+            this.ribbonPageGroup2,
+            this.ribbonPageGroup3,
+            this.ribbonPageGroup4});
             this.ribbonPage.Name = "ribbonPage";
             this.ribbonPage.Text = "View";
             // 
@@ -284,7 +345,19 @@
             // 
             this.ribbonPageGroup2.ItemLinks.Add(this.ajouter_car);
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
-            this.ribbonPageGroup2.Text = "ribbonPageGroup2";
+            this.ribbonPageGroup2.Text = "Insertion";
+            // 
+            // ribbonPageGroup3
+            // 
+            this.ribbonPageGroup3.ItemLinks.Add(this.barButtonItem9);
+            this.ribbonPageGroup3.Name = "ribbonPageGroup3";
+            this.ribbonPageGroup3.Text = "Declaration";
+            // 
+            // ribbonPageGroup4
+            // 
+            this.ribbonPageGroup4.ImageOptions.Image = global::DXApplication1.Properties.Resources.icons8_receipt_32;
+            this.ribbonPageGroup4.ItemLinks.Add(this.barButtonItem10);
+            this.ribbonPageGroup4.Name = "ribbonPageGroup4";
             // 
             // ribbonPage1
             // 
@@ -304,6 +377,7 @@
             // 
             // ribbonStatusBar
             // 
+            this.ribbonStatusBar.ItemLinks.Add(this.links);
             this.ribbonStatusBar.Location = new System.Drawing.Point(0, 575);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbonControl;
@@ -508,7 +582,8 @@
             this.colDate,
             this.colfirst_kilometrage,
             this.gridColumn3,
-            this.gridColumn4});
+            this.gridColumn4,
+            this.gridColumn6});
             this.gridView2.GridControl = this.gridControl2;
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsBehavior.Editable = false;
@@ -573,16 +648,20 @@
             this.gridColumn3.Caption = "id";
             this.gridColumn3.FieldName = "id";
             this.gridColumn3.Name = "gridColumn3";
-            this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 7;
             // 
             // gridColumn4
             // 
             this.gridColumn4.Caption = "id_V";
             this.gridColumn4.FieldName = "id_vehecule";
             this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 8;
+            // 
+            // gridColumn6
+            // 
+            this.gridColumn6.Caption = "date2";
+            this.gridColumn6.FieldName = "datenow";
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 7;
             // 
             // barManager1
             // 
@@ -678,7 +757,8 @@
             // 
             this.toastNotificationsManager1.ApplicationId = "df05c7e4-eeb3-4872-a22b-8d68c39e912e";
             this.toastNotificationsManager1.Notifications.AddRange(new DevExpress.XtraBars.ToastNotifications.IToastNotificationProperties[] {
-            new DevExpress.XtraBars.ToastNotifications.ToastNotification("c19f92f7-3e15-4e42-a3cc-f14b50caf736", ((System.Drawing.Image)(resources.GetObject("toastNotificationsManager1.Notifications"))), "vidanges ", "vidanges ", "", DevExpress.XtraBars.ToastNotifications.ToastNotificationTemplate.ImageAndText01)});
+            new DevExpress.XtraBars.ToastNotifications.ToastNotification("c19f92f7-3e15-4e42-a3cc-f14b50caf736", ((System.Drawing.Image)(resources.GetObject("toastNotificationsManager1.Notifications"))), "vidanges ", "vidanges détecter", "", DevExpress.XtraBars.ToastNotifications.ToastNotificationSound.Reminder, DevExpress.XtraBars.ToastNotifications.ToastNotificationDuration.Long, DevExpress.XtraBars.ToastNotifications.ToastNotificationTemplate.ImageAndText01)});
+            this.toastNotificationsManager1.Activated += new System.EventHandler<DevExpress.XtraBars.ToastNotifications.ToastNotificationEventArgs>(this.toastNotificationsManager1_Activated);
             // 
             // notifyIcon1
             // 
@@ -705,7 +785,7 @@
             // 
             // timer1
             // 
-            this.timer1.Interval = 10000;
+            this.timer1.Interval = 18000000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
@@ -722,6 +802,7 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
+            this.IconOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("Form1.IconOptions.LargeImage")));
             this.Name = "Form1";
             this.Ribbon = this.ribbonControl;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -810,7 +891,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colDate;
         private DevExpress.XtraGrid.Columns.GridColumn colfirst_kilometrage;
         private DevExpress.Utils.Behaviors.BehaviorManager behaviorManager1;
-        private System.Windows.Forms.BindingSource reaparationBindingSource;
         private DevExpress.XtraBars.BarButtonItem ajouter_car;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
         private DevExpress.XtraBars.ToastNotifications.ToastNotificationsManager toastNotificationsManager1;
@@ -828,5 +908,14 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private System.Windows.Forms.Timer timer1;
+        private DevExpress.XtraBars.BarLinkContainerItem links;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem6;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem7;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem9;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup3;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup4;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem10;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
+        private System.Windows.Forms.BindingSource reaparationBindingSource;
     }
 }

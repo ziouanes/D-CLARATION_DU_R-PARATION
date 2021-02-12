@@ -13,7 +13,7 @@ namespace DXApplication1
         {
             InitializeComponent();
         }
-        public void InitData(string n, string nom, string Carburant, string Marque, string matricule,string first_kilometrage,string _date, List<description> description)
+        public void InitData(string n, string nom, string Carburant, string Marque, string matricule, string first_kilometrage, string _date,string _datenow, List<description> description)
         {
             Parameters["parameter_n"].Value = n;
             Parameters["parameter_nom"].Value = nom;
@@ -22,6 +22,8 @@ namespace DXApplication1
             Parameters["parameter_matricule"].Value = matricule;
             Parameters["parameter_first_kilometrage"].Value = first_kilometrage;
             Parameters["parameter__date"].Value = _date;
+            Parameters["parameter_datenow"].Value = _datenow;
+
             objectDataSource1.DataSource = description;
 
         }

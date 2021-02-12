@@ -16,6 +16,7 @@ using Microsoft.Win32;
 
 using Dapper;
 using DevExpress.Xpo;
+using System.Diagnostics;
 
 namespace DXApplication1
 {
@@ -65,6 +66,7 @@ namespace DXApplication1
 
         private void select_new_Data()
         {
+            try { 
             using (SqlConnection sql_con = new SqlConnection(@"server =192.168.100.92;database = simpleDatabase ; user id = log1; password=P@ssword1965** ;MultipleActiveResultSets = True;"))
 
             {
@@ -76,11 +78,24 @@ namespace DXApplication1
 
 
             }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                //this.Dispose();
+            }
         }
 
 
         private void select_old_Data()
         {
+            try
+            {
+
+            
             using (SqlConnection sql_con = new SqlConnection(@"server =192.168.100.92;database = simpleDatabase ; user id = log1; password=P@ssword1965** ;MultipleActiveResultSets = True;"))
 
             {
@@ -88,11 +103,20 @@ namespace DXApplication1
                 if (sql_con.State == ConnectionState.Closed)
                     sql_con.Open();
 
-                string query = $"select r.[n/] as numero , r.id ,r.[nom] as 'Nom',r.[Carburant] as Carburant ,r.[first_kilometrage] as kilometrage,v.Marque as Marque,v.matricule as Immatriculation , v.id as id_vehecule ,r.[_date] as 'Date' from [Reaparation] r inner join vehicules v on r.vehecule = v.id order by r.[_date] DESC";
+                string query = $"select r.[n/] as numero , r.id ,r.[nom] as 'Nom',r.[Carburant] as Carburant ,r.[first_kilometrage] as kilometrage,v.Marque as Marque,v.matricule as Immatriculation , v.id as id_vehecule ,r.[_date] as 'Date' , r.[datenow] as datenow from [Reaparation] r inner join vehicules v on r.vehecule = v.id order by r.[_date] DESC";
 
                 reaparationBindingSource.DataSource = sql_con.Query<Reaparation>(query, commandType: CommandType.Text);
 
 
+            }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                //this.Dispose();
             }
         }
 
@@ -127,7 +151,8 @@ namespace DXApplication1
 
         private void ajouter_car_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            // toastNotificationsManager1.ShowNotification("c19f92f7-3e15-4e42-a3cc-f14b50caf736");
+            VEHECULES VS = new VEHECULES();
+            VS.ShowDialog();
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)
@@ -184,11 +209,11 @@ namespace DXApplication1
 
             DataRow red = gridView1.GetFocusedDataRow();
             
-                var row = gridView1.FocusedRowHandle;
-                string cellidV;
-                DateTime cell_date;
-                 string cellMarque;
-                string cell_kelo;
+            var row = gridView1.FocusedRowHandle;
+            string cellidV;
+            DateTime cell_date;
+             string cellMarque;
+            string cell_kelo;
             string cellImmatriculation;
 
             cellidV = gridView1.GetRowCellValue(row, "id_v").ToString();
@@ -218,6 +243,7 @@ namespace DXApplication1
             string cellid;
             cellid = gridView2.GetRowCellValue(row2, "id").ToString();
 
+            try { 
             if (Program.sql_con.State == ConnectionState.Closed)
                 Program.sql_con.Open();
             string query = $" select  [_description] from [dbo].[descriptions] where [id_Reaparation] = { cellid}";
@@ -229,6 +255,15 @@ namespace DXApplication1
                 frm.ShowDialog();
 
             }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                //this.Dispose();
+            }
 
         }
 
@@ -238,8 +273,8 @@ namespace DXApplication1
             string cellid;
             cellid = gridView2.GetRowCellValue(row2, "id").ToString();
 
-           
 
+            try { 
 
 
             using (SqlCommand deleteCommand = new SqlCommand("DELETE FROM Reaparation WHERE id = @id", Program.sql_con))
@@ -256,7 +291,15 @@ namespace DXApplication1
 
             }
             gridView2.DeleteRow(row2);
-            
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                //this.Dispose();
+            }
 
 
         }
@@ -274,6 +317,7 @@ namespace DXApplication1
             string cellNom;
             string cellCarb;
             string cellnumero;
+            DateTime cell_newdate;
 
 
             cellid = gridView2.GetRowCellValue(row2, "id").ToString();
@@ -285,11 +329,13 @@ namespace DXApplication1
             cellNom = gridView2.GetRowCellValue(row2, "Nom").ToString();
             cellCarb = gridView2.GetRowCellValue(row2, "Carburant").ToString();
             cellnumero = gridView2.GetRowCellValue(row2, "numero").ToString();
+            cell_newdate = Convert.ToDateTime(gridView2.GetRowCellValue(row2, "datenow").ToString());
 
 
 
 
-            add_new add_New2 = new add_new(cellnumero,int.Parse(cellid),int.Parse( cellidV), cellMarque , cellImmatriculation , cell_date  , cell_kelo, cellNom , cellCarb);
+
+            add_new add_New2 = new add_new(cellnumero,int.Parse(cellid),int.Parse( cellidV), cellMarque , cellImmatriculation , cell_date  , cell_kelo, cellNom , cellCarb, cell_newdate);
             add_New2.ShowDialog();
             select_new_Data();
             select_old_Data();
@@ -302,6 +348,7 @@ namespace DXApplication1
             select_new_Data();
             select_old_Data();
 
+            try { 
             if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
 
             {
@@ -317,14 +364,82 @@ namespace DXApplication1
                 {
                     //listBoxControl1.Items.Add(row["_description"].ToString());
                     //MessageBox.Show("test");
-                    toastNotificationsManager1.ShowNotification("c19f92f7-3e15-4e42-a3cc-f14b50caf736");
 
                 }
+                    toastNotificationsManager1.ShowNotification("c19f92f7-3e15-4e42-a3cc-f14b50caf736");
 
 
 
 
             }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                //this.Dispose();
+            }
+        }
+
+        private void toastNotificationsManager1_Activated(object sender, DevExpress.XtraBars.ToastNotifications.ToastNotificationEventArgs e)
+        {
+            switch (e.NotificationID.ToString())
+            {
+                case "c19f92f7-3e15-4e42-a3cc-f14b50caf736":
+                    this.WindowState = FormWindowState.Maximized;
+                    break;
+            }
+        }
+
+        private void barButtonItem6_ItemClick_1(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/ziouanes/D-CLARATION_DU_R-PARATION");
+
+        }
+
+        private void barButtonItem7_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            System.Diagnostics.Process.Start("mailto:contact@hamza-ziouane.tech");
+
+        }
+
+        private void barButtonItem9_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            try
+            {
+            Process.Start("C:\\Program Files (x86)\\hamza\\registre_de_carburant\\simpleDatabase7.exe");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                //this.Dispose();
+            }
+
+            //System.Diagnostics.Process.Start( @"hamza\registre_de_carburant\simpleDatabase7.exe");
+        }
+
+        private void barButtonItem10_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            try
+            {
+                Process.Start("C:\\Program Files (x86)\\hamza\\FACTURE_DE_REPARATION\\simpleDatabase7.exe");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                //this.Dispose();
+            }
+
         }
     }
 }

@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions21 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions22 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions1 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions2 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(add_new));
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions23 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
-            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions24 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions3 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
+            DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions windowsUIButtonImageOptions4 = new DevExpress.XtraBars.Docking2010.WindowsUIButtonImageOptions();
             this.windowsUIButtonPanelMain = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.labelControl = new DevExpress.XtraEditors.LabelControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
@@ -67,6 +67,8 @@
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.toastNotificationsManager1 = new DevExpress.XtraBars.ToastNotifications.ToastNotificationsManager(this.components);
+            this.dateEdit1now = new DevExpress.XtraEditors.DateEdit();
+            this._datenow = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
@@ -98,6 +100,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.toastNotificationsManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1now.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1now.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._datenow)).BeginInit();
             this.SuspendLayout();
             // 
             // windowsUIButtonPanelMain
@@ -117,15 +122,15 @@
             this.windowsUIButtonPanelMain.AppearanceButton.Pressed.Options.UseFont = true;
             this.windowsUIButtonPanelMain.AppearanceButton.Pressed.Options.UseForeColor = true;
             this.windowsUIButtonPanelMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(63)))));
-            windowsUIButtonImageOptions21.ImageUri.Uri = "Save;Size32x32;GrayScaled";
-            windowsUIButtonImageOptions22.Image = ((System.Drawing.Image)(resources.GetObject("windowsUIButtonImageOptions22.Image")));
-            windowsUIButtonImageOptions23.ImageUri.Uri = "SaveAndNew;Size32x32;GrayScaled";
-            windowsUIButtonImageOptions24.ImageUri.Uri = "Reset;Size32x32;GrayScaled";
+            windowsUIButtonImageOptions1.ImageUri.Uri = "Save;Size32x32;GrayScaled";
+            windowsUIButtonImageOptions2.Image = ((System.Drawing.Image)(resources.GetObject("windowsUIButtonImageOptions2.Image")));
+            windowsUIButtonImageOptions3.ImageUri.Uri = "SaveAndNew;Size32x32;GrayScaled";
+            windowsUIButtonImageOptions4.ImageUri.Uri = "Reset;Size32x32;GrayScaled";
             this.windowsUIButtonPanelMain.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("Enregistrer", true, windowsUIButtonImageOptions21, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("Enregistrer et Imprimer", true, windowsUIButtonImageOptions22, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("Enregistrer et nouveau", true, windowsUIButtonImageOptions23, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1, false),
-            new DevExpress.XtraBars.Docking2010.WindowsUIButton("Réinitialiser", true, windowsUIButtonImageOptions24, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1, false)});
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("Enregistrer", true, windowsUIButtonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("Enregistrer et Imprimer", true, windowsUIButtonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("Enregistrer et nouveau", true, windowsUIButtonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1, false),
+            new DevExpress.XtraBars.Docking2010.WindowsUIButton("Réinitialiser", true, windowsUIButtonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1, false)});
             this.windowsUIButtonPanelMain.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.windowsUIButtonPanelMain.EnableImageTransparency = true;
             this.windowsUIButtonPanelMain.ForeColor = System.Drawing.Color.White;
@@ -158,6 +163,7 @@
             this.labelControl.Size = new System.Drawing.Size(924, 30);
             this.labelControl.TabIndex = 5;
             this.labelControl.Text = "Demande de Reparation";
+            this.labelControl.Click += new System.EventHandler(this.labelControl_Click);
             // 
             // layoutControl1
             // 
@@ -172,6 +178,7 @@
             this.layoutControl1.Controls.Add(this.textEdit3_matricul);
             this.layoutControl1.Controls.Add(this.textEdit4);
             this.layoutControl1.Controls.Add(this.dateEdit1);
+            this.layoutControl1.Controls.Add(this.dateEdit1now);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 30);
             this.layoutControl1.Name = "layoutControl1";
@@ -182,9 +189,9 @@
             // 
             // textEdit1
             // 
-            this.textEdit1.Location = new System.Drawing.Point(104, 47);
+            this.textEdit1.Location = new System.Drawing.Point(301, 47);
             this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(356, 20);
+            this.textEdit1.Size = new System.Drawing.Size(257, 20);
             this.textEdit1.StyleController = this.layoutControl1;
             this.textEdit1.TabIndex = 18;
             // 
@@ -258,9 +265,9 @@
             // 
             // textEditname
             // 
-            this.textEditname.Location = new System.Drawing.Point(544, 47);
+            this.textEditname.Location = new System.Drawing.Point(642, 47);
             this.textEditname.Name = "textEditname";
-            this.textEditname.Size = new System.Drawing.Size(356, 20);
+            this.textEditname.Size = new System.Drawing.Size(258, 20);
             this.textEditname.StyleController = this.layoutControl1;
             this.textEditname.TabIndex = 4;
             // 
@@ -316,11 +323,12 @@
             // layoutControlGroup1
             // 
             this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem1,
             this.layoutControlGroup2,
             this._date,
             this.layoutControlGroup3,
-            this.layoutControlItem5});
+            this._datenow,
+            this.layoutControlItem5,
+            this.layoutControlItem1});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Size = new System.Drawing.Size(880, 331);
@@ -329,9 +337,9 @@
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.textEditname;
-            this.layoutControlItem1.Location = new System.Drawing.Point(440, 0);
+            this.layoutControlItem1.Location = new System.Drawing.Point(538, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(440, 24);
+            this.layoutControlItem1.Size = new System.Drawing.Size(342, 24);
             this.layoutControlItem1.Text = "Nom et Prénom";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(77, 13);
             // 
@@ -464,9 +472,9 @@
             // layoutControlItem5
             // 
             this.layoutControlItem5.Control = this.textEdit1;
-            this.layoutControlItem5.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem5.Location = new System.Drawing.Point(197, 0);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(440, 24);
+            this.layoutControlItem5.Size = new System.Drawing.Size(341, 24);
             this.layoutControlItem5.Text = "N°";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(77, 13);
             // 
@@ -475,6 +483,30 @@
             this.toastNotificationsManager1.ApplicationId = "Processus";
             this.toastNotificationsManager1.Notifications.AddRange(new DevExpress.XtraBars.ToastNotifications.IToastNotificationProperties[] {
             new DevExpress.XtraBars.ToastNotifications.ToastNotification("1d00270b-1651-4ed4-a139-bd59d5d8cf8e", ((System.Drawing.Image)(resources.GetObject("toastNotificationsManager1.Notifications"))), "", "Ajouter success", "", DevExpress.XtraBars.ToastNotifications.ToastNotificationSound.Reminder, DevExpress.XtraBars.ToastNotifications.ToastNotificationDuration.Default, DevExpress.XtraBars.ToastNotifications.ToastNotificationTemplate.ImageAndText01)});
+            // 
+            // dateEdit1now
+            // 
+            this.dateEdit1now.EditValue = new System.DateTime(2021, 2, 2, 12, 24, 38, 0);
+            this.dateEdit1now.Location = new System.Drawing.Point(104, 47);
+            this.dateEdit1now.Name = "dateEdit1now";
+            this.dateEdit1now.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dateEdit1now.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dateEdit1now.Size = new System.Drawing.Size(113, 20);
+            this.dateEdit1now.StyleController = this.layoutControl1;
+            this.dateEdit1now.TabIndex = 9;
+            // 
+            // _datenow
+            // 
+            this._datenow.Control = this.dateEdit1now;
+            this._datenow.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this._datenow.CustomizationFormText = "date : ";
+            this._datenow.Location = new System.Drawing.Point(0, 0);
+            this._datenow.Name = "_datenow";
+            this._datenow.Size = new System.Drawing.Size(197, 24);
+            this._datenow.Text = "aujourd\'hui : ";
+            this._datenow.TextSize = new System.Drawing.Size(77, 13);
             // 
             // add_new
             // 
@@ -486,9 +518,9 @@
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.labelControl);
             this.Controls.Add(this.windowsUIButtonPanelMain);
+            this.IconOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("add_new.IconOptions.LargeImage")));
             this.Name = "add_new";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "add_new";
             this.Load += new System.EventHandler(this.add_new_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.add_new_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.add_new_KeyUp);
@@ -523,6 +555,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.toastNotificationsManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1now.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1now.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._datenow)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -562,5 +597,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
         private DevExpress.XtraEditors.TextEdit textEdit1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
+        private DevExpress.XtraEditors.DateEdit dateEdit1now;
+        private DevExpress.XtraLayout.LayoutControlItem _datenow;
     }
 }

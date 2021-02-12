@@ -7,6 +7,8 @@ using DevExpress.Skins;
 using DevExpress.LookAndFeel;
 using System.Diagnostics;
 using System.Data.SqlClient;
+using System.Threading;
+using System.Globalization;
 
 namespace DXApplication1
 {
@@ -38,7 +40,10 @@ namespace DXApplication1
             //else let  the below code run
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+               /* Thread.CurrentThread.CurrentCulture = new CultureInfo("it-IT");
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo("it-IT");
+*/
+                Application.Run(new Form1());
             }
 
         }

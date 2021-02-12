@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icons8_statue_of_liberty.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
     <Reference Include="DevExpress.BonusSkins.v20.1" />
@@ -154,6 +157,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Report_declaration.resx">
       <DependentUpon>Report_declaration.cs</DependentUpon>
@@ -164,6 +168,7 @@
     <None Include="App.config" />
     <None Include="Properties\DataSources\Anticipation.datasource" />
     <None Include="Properties\DataSources\Reaparation.datasource" />
+    <None Include="Properties\DataSources\Véhicules.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -178,6 +183,15 @@
     <PackageReference Include="Dapper">
       <Version>1.50.2</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icons8_statue_of_liberty.ico" />
+    <None Include="Resources\icons8_receipt_32.png" />
+    <None Include="Resources\icons8_login_as_user_641.png" />
+    <None Include="Resources\icons8_login_as_user_64.png" />
+    <None Include="Resources\icons8_login_as_user_48.png" />
+    <None Include="Resources\icons8_email_32.png" />
+    <None Include="Resources\icons8_github_32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

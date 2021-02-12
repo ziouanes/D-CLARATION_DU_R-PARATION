@@ -15,5 +15,6 @@ namespace DXApplication1
         public int KILOMÉTRAGE_V { get; set; }
         public DateTime Date_V { get; set; }
         public int Taux { get; set; }
+
     }
 }

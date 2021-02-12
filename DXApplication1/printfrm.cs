@@ -32,7 +32,7 @@ namespace DXApplication1
                     sql_con.Open();
                 SqlCommand cmd = sql_con.CreateCommand();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "select r.[n/],r.[nom] , r.[Carburant]  ,v.[Marque] ,v.[matricule]   , r.[first_kilometrage] , r.[_date] from [Reaparation] r inner join [vehicules] v on r.vehecule  =v.id  where r.id = " + id_Reaparation + "";
+                cmd.CommandText = "select r.[n/],r.[nom] , r.[Carburant]  ,v.[Marque] ,v.[matricule]   , r.[first_kilometrage] , r.[_date]  ,r.[datenow] as datenow from [Reaparation] r inner join [vehicules] v on r.vehecule  =v.id  where r.id = " + id_Reaparation + "";
                 DataTable table = new DataTable();
                 cmd.ExecuteNonQuery();
                 SqlDataAdapter ad  = new SqlDataAdapter(cmd);
@@ -41,7 +41,7 @@ namespace DXApplication1
                 {
 
 
-                    report.InitData(row["n/"].ToString(), row["nom"].ToString(), row["Carburant"].ToString(), row["Marque"].ToString(), row["matricule"].ToString(), row["first_kilometrage"].ToString(), row["_date"].ToString(),  descriptions);
+                    report.InitData(row["n/"].ToString(), row["nom"].ToString(), row["Carburant"].ToString(), row["Marque"].ToString(), row["matricule"].ToString(), row["first_kilometrage"].ToString(), row["_date"].ToString(),row["datenow"].ToString(),  descriptions);
                     documentViewer1.DocumentSource = report;
                     report.CreateDocument();
 
@@ -52,6 +52,16 @@ namespace DXApplication1
         }
 
         private void printfrm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void documentViewer1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void printPreviewBarItem8_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
 
         }

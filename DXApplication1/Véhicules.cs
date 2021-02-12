@@ -11,7 +11,7 @@ namespace DXApplication1
         public string Marque { get; set; }
         public string matricule { get; set; }
         public string km_V { get; set; }
-        public int date_V { get; set; }
+        public DateTime date_V { get; set; }
 
     }
 }

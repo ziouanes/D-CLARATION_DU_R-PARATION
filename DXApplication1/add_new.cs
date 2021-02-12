@@ -1,63 +1,77 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using DevExpress.XtraEditors;
-using System.Data.SqlClient;
+﻿using Dapper;
 using DevExpress.XtraBars.Docking2010;
-using Dapper;
+using DevExpress.XtraEditors;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace DXApplication1
 {
     public partial class add_new : DevExpress.XtraEditors.XtraForm
     {
-        string st ="";
-        public add_new( DateTime date1, string vehicule_id, string marque ,string matriculation,  string kilomitrage)
+        DateTime datenowedit = DateTime.Now;
+        DateTime dateedit = DateTime.Now;
+
+        int idEdit = 0;
+
+        string st = "";
+        public add_new(DateTime date1, string vehicule_id, string marque, string matriculation, string kilomitrage)
         {
             InitializeComponent();
 
             st = vehicule_id;
             numericUpDown1.Text = kilomitrage;
-            dateEdit1.DateTime = date1;
+            dateedit = date1;
             textEdit1_marque.Text = marque;
             textEdit3_matricul.Text = matriculation;
         }
 
-        public add_new(string numero,int id , int id_v , string marque , string matricule , DateTime date , string kilo, string nom, string carb)
+        public add_new(string numero, int id, int id_v, string marque, string matricule, DateTime date, string kilo, string nom, string carb, DateTime cell_newdate)
         {
 
             InitializeComponent();
+            idEdit = id;
             st = id_v.ToString();
             numericUpDown1.Text = kilo;
-            dateEdit1.DateTime = date;
+            dateedit = date;
             textEdit1_marque.Text = marque;
             textEdit3_matricul.Text = matricule;
             textEditname.Text = nom;
             textEdit4.Text = carb;
             textEdit1.Text = numero;
+            datenowedit = cell_newdate;
 
-            if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
-            
+            try
             {
-                SqlCommand cmd = Program.sql_con.CreateCommand();
-                cmd.CommandType = CommandType.Text;
-                
-                cmd.CommandText = "SELECT [_description] from descriptions where id_Reaparation =" + id + "";
-                DataTable table = new DataTable();
-                cmd.ExecuteNonQuery();
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(table);
-                foreach (DataRow row in table.Rows)
+                if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
+
                 {
-                    listBoxControl1.Items.Add(row["_description"].ToString());
+                    SqlCommand cmd = Program.sql_con.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+
+                    cmd.CommandText = "SELECT [_description] from descriptions where id_Reaparation =" + id + "";
+                    DataTable table = new DataTable();
+                    cmd.ExecuteNonQuery();
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(table);
+                    foreach (DataRow row in table.Rows)
+                    {
+                        listBoxControl1.Items.Add(row["_description"].ToString());
+
+                    }
 
                 }
-
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                //this.Dispose();
             }
 
 
@@ -74,45 +88,60 @@ namespace DXApplication1
 
         private void add_new_Load(object sender, EventArgs e)
         {
-            //MessageBox.Show(dateEdit1.Text);
+            //XtraMessageBox.Show(dateEdit1.Text);
             this.dateEdit1.Properties.DisplayFormat.FormatString = "dd/MM/yyyy";
             this.dateEdit1.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.dateEdit1.Properties.EditFormat.FormatString = "dd/MM/yyyy";
             this.dateEdit1.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.dateEdit1.Properties.Mask.EditMask = "dd/MM/yyyy";
-            //dateEdit1.EditValue = DateTime.Now;
+
+
+            dateEdit1now.EditValue = datenowedit;
+            dateEdit1.EditValue = dateedit;
 
             //dateEdit1.Properties.Mask.UseMaskAsDisplayFormat = true;
+
             ExecuteQueryvehecules();
 
         }
         private void ExecuteQueryvehecules()
         {
-
-            if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
-
-            Program.sql_cmd = Program.sql_con.CreateCommand();
-            Program.sql_cmd.CommandType = CommandType.Text;
-            Program.sql_cmd.CommandText = "select id , concat(Marque,+'         '+matricule) as Vehicule  from [vehicules] ORDER BY Marque";
-            Program.sql_cmd.ExecuteNonQuery();
-            DataTable dt = new DataTable();
-            Program.ad = new SqlDataAdapter(Program.sql_cmd);
-            Program.ad.Fill(dt);
-            comboBox1.DataSource = dt;
-            comboBox1.ValueMember = "id";
-            comboBox1.DisplayMember = "Vehicule";
-            //comboBox1.SelectedIndex = -1;
-            if (st !="")
+            try
             {
-            comboBox1.SelectedValue = st;
 
+                if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
+
+                Program.sql_cmd = Program.sql_con.CreateCommand();
+                Program.sql_cmd.CommandType = CommandType.Text;
+                Program.sql_cmd.CommandText = "select id , concat(Marque,+'         '+matricule) as Vehicule  from [vehicules] ORDER BY Marque";
+                Program.sql_cmd.ExecuteNonQuery();
+                DataTable dt = new DataTable();
+                Program.ad = new SqlDataAdapter(Program.sql_cmd);
+                Program.ad.Fill(dt);
+                comboBox1.DataSource = dt;
+                comboBox1.ValueMember = "id";
+                comboBox1.DisplayMember = "Vehicule";
+                //comboBox1.SelectedIndex = -1;
+                if (st != "")
+                {
+                    comboBox1.SelectedValue = st;
+
+                }
+
+
+
+
+                Program.sql_con.Close();
             }
-            
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                //this.Dispose();
+            }
 
-
-
-
-            Program.sql_con.Close();
 
             comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             //comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
@@ -167,237 +196,428 @@ namespace DXApplication1
 
         private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            string s = "";
-            if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
-            if (comboBox1.SelectedIndex > -1)
+            try
             {
-                SqlCommand cmd = Program.sql_con.CreateCommand();
-                cmd.CommandType = CommandType.Text;
-                s = comboBox1.SelectedValue.ToString();
-                cmd.CommandText = "SELECT [Marque] , [matricule] from [dbo].[vehicules] where id =" + s + "";
-                DataTable table = new DataTable();
-                cmd.ExecuteNonQuery();
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(table);
-                foreach (DataRow row in table.Rows)
-                {
-                    textEdit1_marque.Text = row["Marque"].ToString();
-                    textEdit3_matricul.Text = row["matricule"].ToString();
-                }
 
+                string s = "";
+                if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
+                if (comboBox1.SelectedIndex > -1)
+                {
+                    SqlCommand cmd = Program.sql_con.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    s = comboBox1.SelectedValue.ToString();
+                    cmd.CommandText = "SELECT [Marque] , [matricule] from [dbo].[vehicules] where id =" + s + "";
+                    DataTable table = new DataTable();
+                    cmd.ExecuteNonQuery();
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(table);
+                    foreach (DataRow row in table.Rows)
+                    {
+                        textEdit1_marque.Text = row["Marque"].ToString();
+                        textEdit3_matricul.Text = row["matricule"].ToString();
+                    }
+
+                }
             }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                //this.Dispose();
+            }
+
         }
 
         private void windowsUIButtonPanelMain_Click(object sender, EventArgs e)
         {
-            
+
 
         }
         //setexecutequery
         private void ExecuteQuery(string txtQuery)
         {
-            //Program.SetConnection();
-            if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
-            Program.sql_cmd = Program.sql_con.CreateCommand();
-            Program.sql_cmd.CommandText = txtQuery;
-            Program.sql_cmd.ExecuteNonQuery();
-            Program.sql_con.Close();
+            try
+            {
+
+
+                //Program.SetConnection();
+                if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
+                Program.sql_cmd = Program.sql_con.CreateCommand();
+                Program.sql_cmd.CommandText = txtQuery;
+                Program.sql_cmd.ExecuteNonQuery();
+                Program.sql_con.Close();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                //this.Dispose();
+            }
+
         }
 
         private void windowsUIButtonPanelMain_ButtonClick(object sender, ButtonEventArgs e)
         {
             WindowsUIButton btn = e.Button as WindowsUIButton;
-            if (btn.Tag != null && btn.Tag.Equals("Enregistrer"))
-            {
-                toastNotificationsManager1.ShowNotification("1d00270b-1651-4ed4-a139-bd59d5d8cf8e");
 
-            }
             //enregistre
             if (e.Button == windowsUIButtonPanelMain.Buttons[0])
             {
-                
-                if (textEditname.Text == "" || textEdit4.Text == "" || numericUpDown1.Text == "" || textEdit1_marque.Text == "" ||textEdit3_matricul.Text == ""|| listBoxControl1.Items.IndexOf(listBoxControl1.SelectedItem) == -1)
+                try
                 {
-                    MessageBox.Show("champs obligatoires");
-                  
-                }
-
-                else
-                {
-                    DateTime dt = Convert.ToDateTime(dateEdit1.EditValue);
 
 
-                    string textquery = "insert into [Reaparation]([n/],nom ,[Carburant],[vehecule],[first_kilometrage],[_date])VALUES('" + textEdit1.Text + "','" + textEditname.Text + "','" + textEdit4.Text + "'," + comboBox1.SelectedValue + ",'" + numericUpDown1.Text + "','" + dt.ToString("yyyy-MM-dd") + "')";
-                    ExecuteQuery(textquery);
-                    if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
-                    Program.sql_cmd = new SqlCommand("SELECT TOP 1 id FROM [Reaparation] ORDER BY id DESC ", Program.sql_con);
-                    string id = "";
-                    Program.db = Program.sql_cmd.ExecuteReader();
-                    if (Program.db.HasRows)
+
+                    if (textEditname.Text == "" || textEdit4.Text == "" || numericUpDown1.Text == "" || textEdit1_marque.Text == "" || textEdit3_matricul.Text == "" || listBoxControl1.Items.IndexOf(listBoxControl1.SelectedItem) == -1)
                     {
-
-
-                        Program.db.Read();
-
-
-                          id   = Program.db[0].ToString(); 
+                        XtraMessageBox.Show("champs obligatoires");
 
                     }
 
-                    if (listBoxControl1.Items.Count != 0)
-                    {
-                        string sql = "INSERT INTO [dbo].[descriptions](_description,id_Reaparation) VALUES(@DESCRIPTION,@id_reparation)";
-
-                            foreach (string _description in listBoxControl1.Items)
-                        {
-                            Program.sql_cmd = new SqlCommand(sql, Program.sql_con);
-                            Program.sql_cmd.Parameters.AddWithValue("@DESCRIPTION", _description);
-                            Program.sql_cmd.Parameters.AddWithValue("@id_reparation", id);
-
-                            if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
-                            Program.sql_cmd.ExecuteNonQuery();
-                            Program.sql_con.Close();
-                        }
-                        toastNotificationsManager1.ShowNotification("1d00270b-1651-4ed4-a139-bd59d5d8cf8e");
-                    }
                     else
                     {
-                        MessageBox.Show("Error!!!");
+
+
+                        DateTime dt = Convert.ToDateTime(dateEdit1.EditValue);
+                        DateTime dtnow = Convert.ToDateTime(dateEdit1now.EditValue);
+
+
+                        if (idEdit != 0)
+                        //update
+                        {
+                            string textquery2 = "update  [Reaparation] set [n/] = '" + textEdit1.Text + "',nom  = '" + textEditname.Text + "' ,[Carburant] = '" + textEdit4.Text + "'  ,[vehecule] = " + comboBox1.SelectedValue + " ,[first_kilometrage] =  '" + numericUpDown1.Text + "' ,[_date]  = '" + dt.ToString("yyyy-MM-dd") + "' ,[datenow] = '" + dtnow.ToString("yyyy-MM-dd") + "'  where id = " + idEdit + "";
+                            ExecuteQuery(textquery2);
+
+                            string textquery3 = "DELETE  from descriptions where id_Reaparation = " + idEdit + " ";
+                            ExecuteQuery(textquery3);
+
+                            if (listBoxControl1.Items.Count != 0)
+                            {
+                                string sql = "INSERT INTO [dbo].[descriptions](_description,id_Reaparation) VALUES(@DESCRIPTION,@id_reparation)";
+
+                                foreach (string _description in listBoxControl1.Items)
+                                {
+                                    Program.sql_cmd = new SqlCommand(sql, Program.sql_con);
+                                    Program.sql_cmd.Parameters.AddWithValue("@DESCRIPTION", _description);
+                                    Program.sql_cmd.Parameters.AddWithValue("@id_reparation", idEdit);
+
+                                    if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
+                                    Program.sql_cmd.ExecuteNonQuery();
+                                    Program.sql_con.Close();
+                                }
+                                toastNotificationsManager1.ShowNotification("1d00270b-1651-4ed4-a139-bd59d5d8cf8e");
+                                this.Close();
+                            }
+
+                        }
+                        else
+                        {
+                            string textquery = "insert into [Reaparation]([n/],nom ,[Carburant],[vehecule],[first_kilometrage],[_date],[datenow])VALUES('" + textEdit1.Text + "','" + textEditname.Text + "','" + textEdit4.Text + "'," + comboBox1.SelectedValue + ",'" + numericUpDown1.Text + "','" + dt.ToString("yyyy-MM-dd") + "' ,'" + dtnow.ToString("yyyy-MM-dd") + "' )";
+                            ExecuteQuery(textquery);
+                            if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
+                            Program.sql_cmd = new SqlCommand("SELECT TOP 1 id FROM [Reaparation] ORDER BY id DESC ", Program.sql_con);
+                            string id = "";
+                            Program.db = Program.sql_cmd.ExecuteReader();
+                            if (Program.db.HasRows)
+                            {
+
+
+                                Program.db.Read();
+
+
+                                id = Program.db[0].ToString();
+
+                            }
+
+                            if (listBoxControl1.Items.Count != 0)
+                            {
+                                string sql = "INSERT INTO [dbo].[descriptions](_description,id_Reaparation) VALUES(@DESCRIPTION,@id_reparation)";
+
+                                foreach (string _description in listBoxControl1.Items)
+                                {
+                                    Program.sql_cmd = new SqlCommand(sql, Program.sql_con);
+                                    Program.sql_cmd.Parameters.AddWithValue("@DESCRIPTION", _description);
+                                    Program.sql_cmd.Parameters.AddWithValue("@id_reparation", id);
+
+                                    if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
+                                    Program.sql_cmd.ExecuteNonQuery();
+                                    Program.sql_con.Close();
+                                }
+                                toastNotificationsManager1.ShowNotification("1d00270b-1651-4ed4-a139-bd59d5d8cf8e");
+                            }
+                            else
+                            {
+                                XtraMessageBox.Show("Error!!!");
+                            }
+
+                            this.Close();
+
+
+                        }
+
+
                     }
-
-                    this.Close();
-
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    //this.Dispose();
                 }
 
             }
             //enregistre and print
             if (e.Button == windowsUIButtonPanelMain.Buttons[1])
             {
-
-                if (textEditname.Text == "" || textEdit4.Text == "" || numericUpDown1.Text == "" || textEdit1_marque.Text == "" || textEdit3_matricul.Text == "" || listBoxControl1.Items.IndexOf(listBoxControl1.SelectedItem) == -1)
+                try
                 {
-                    MessageBox.Show("champs obligatoires");
-
-                }
-
-                else
-                {
-                    DateTime dt = Convert.ToDateTime(dateEdit1.EditValue);
 
 
-                    string textquery = "insert into [Reaparation]([n/],nom ,[Carburant],[vehecule],[first_kilometrage],[_date])VALUES('" + textEdit1.Text + "','" + textEditname.Text + "','" + textEdit4.Text + "'," + comboBox1.SelectedValue + ",'" + numericUpDown1.Text + "','" + dt.ToString("yyyy-MM-dd") + "')";
-                    ExecuteQuery(textquery);
-                    if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
-                    Program.sql_cmd = new SqlCommand("SELECT TOP 1 id FROM [Reaparation] ORDER BY id DESC ", Program.sql_con);
-                    string id = "";
-                    Program.db = Program.sql_cmd.ExecuteReader();
-                    if (Program.db.HasRows)
+
+                    if (textEditname.Text == "" || textEdit4.Text == "" || numericUpDown1.Text == "" || textEdit1_marque.Text == "" || textEdit3_matricul.Text == "" || listBoxControl1.Items.IndexOf(listBoxControl1.SelectedItem) == -1)
                     {
-
-
-                        Program.db.Read();
-
-
-                        id = Program.db[0].ToString();
+                        XtraMessageBox.Show("champs obligatoires");
 
                     }
 
-                    if (listBoxControl1.Items.Count != 0)
+                    else
                     {
-                        string sql = "INSERT INTO [dbo].[descriptions](_description,id_Reaparation) VALUES(@DESCRIPTION,@id_reparation)";
+                        DateTime dt = Convert.ToDateTime(dateEdit1.EditValue);
+                        DateTime dtnow = Convert.ToDateTime(dateEdit1now.EditValue);
 
-                        foreach (string _description in listBoxControl1.Items)
+
+                        if (idEdit != 0)
+                        //update 
                         {
-                            Program.sql_cmd = new SqlCommand(sql, Program.sql_con);
-                            Program.sql_cmd.Parameters.AddWithValue("@DESCRIPTION", _description);
-                            Program.sql_cmd.Parameters.AddWithValue("@id_reparation", id);
+                            string textquery2 = "update  [Reaparation] set [n/] = '" + textEdit1.Text + "',nom  = '" + textEditname.Text + "' ,[Carburant] = '" + textEdit4.Text + "'  ,[vehecule] = " + comboBox1.SelectedValue + " ,[first_kilometrage] =  '" + numericUpDown1.Text + "' ,[_date]  = '" + dt.ToString("yyyy-MM-dd") + "' ,[datenow] = '" + dtnow.ToString("yyyy-MM-dd") + "'  where id = " + idEdit + "";
+                            ExecuteQuery(textquery2);
 
-                            if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
-                            Program.sql_cmd.ExecuteNonQuery();
-                            Program.sql_con.Close();
-                        }
-                        toastNotificationsManager1.ShowNotification("1d00270b-1651-4ed4-a139-bd59d5d8cf8e");
+                            string textquery3 = "DELETE  from descriptions where id_Reaparation = " + idEdit + " ";
+                            ExecuteQuery(textquery3);
 
+                            if (listBoxControl1.Items.Count != 0)
+                            {
+                                string sql = "INSERT INTO [dbo].[descriptions](_description,id_Reaparation) VALUES(@DESCRIPTION,@id_reparation)";
 
+                                foreach (string _description in listBoxControl1.Items)
+                                {
+                                    Program.sql_cmd = new SqlCommand(sql, Program.sql_con);
+                                    Program.sql_cmd.Parameters.AddWithValue("@DESCRIPTION", _description);
+                                    Program.sql_cmd.Parameters.AddWithValue("@id_reparation", idEdit);
 
-                        
+                                    if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
+                                    Program.sql_cmd.ExecuteNonQuery();
+                                    Program.sql_con.Close();
+                                }
+                                toastNotificationsManager1.ShowNotification("1d00270b-1651-4ed4-a139-bd59d5d8cf8e");
+                                this.Close();
+                            }
                             if (Program.sql_con.State == ConnectionState.Closed)
-                            Program.sql_con.Open();
-                            string query = $" select  [_description] from [dbo].[descriptions] where [id_Reaparation] = { id}";
+                                Program.sql_con.Open();
+                            string query = $" select  [_description] from [dbo].[descriptions] where [id_Reaparation] = { idEdit}";
                             List<description> descriptions = Program.sql_con.Query<description>(query, commandType: CommandType.Text).ToList();
                             using (printfrm frm = new printfrm())
                             {
-                                frm.PrintInvoice(int.Parse(id), descriptions);
+                                frm.PrintInvoice(idEdit, descriptions);
                                 frm.WindowState = FormWindowState.Maximized;
                                 frm.ShowDialog();
 
                             }
-                        
-                    }
-                    else
-                    {
-                        MessageBox.Show("Error!!!");
-                    }
 
-                    
+                        }
+                        else
+                        {
+
+
+
+
+                            string textquery = "insert into [Reaparation]([n/],nom ,[Carburant],[vehecule],[first_kilometrage],[_date])VALUES('" + textEdit1.Text + "','" + textEditname.Text + "','" + textEdit4.Text + "'," + comboBox1.SelectedValue + ",'" + numericUpDown1.Text + "','" + dt.ToString("yyyy-MM-dd") + "')";
+                            ExecuteQuery(textquery);
+                            if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
+                            Program.sql_cmd = new SqlCommand("SELECT TOP 1 id FROM [Reaparation] ORDER BY id DESC ", Program.sql_con);
+                            string id = "";
+                            Program.db = Program.sql_cmd.ExecuteReader();
+                            if (Program.db.HasRows)
+                            {
+
+
+                                Program.db.Read();
+
+
+                                id = Program.db[0].ToString();
+
+                            }
+
+                            if (listBoxControl1.Items.Count != 0)
+                            {
+                                string sql = "INSERT INTO [dbo].[descriptions](_description,id_Reaparation) VALUES(@DESCRIPTION,@id_reparation)";
+
+                                foreach (string _description in listBoxControl1.Items)
+                                {
+                                    Program.sql_cmd = new SqlCommand(sql, Program.sql_con);
+                                    Program.sql_cmd.Parameters.AddWithValue("@DESCRIPTION", _description);
+                                    Program.sql_cmd.Parameters.AddWithValue("@id_reparation", id);
+
+                                    if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
+                                    Program.sql_cmd.ExecuteNonQuery();
+                                    Program.sql_con.Close();
+                                }
+                                toastNotificationsManager1.ShowNotification("1d00270b-1651-4ed4-a139-bd59d5d8cf8e");
+
+
+
+
+                                if (Program.sql_con.State == ConnectionState.Closed)
+                                    Program.sql_con.Open();
+                                string query = $" select  [_description] from [dbo].[descriptions] where [id_Reaparation] = { id}";
+                                List<description> descriptions = Program.sql_con.Query<description>(query, commandType: CommandType.Text).ToList();
+                                using (printfrm frm = new printfrm())
+                                {
+                                    frm.PrintInvoice(int.Parse(id), descriptions);
+                                    frm.WindowState = FormWindowState.Maximized;
+                                    frm.ShowDialog();
+
+                                }
+
+                            }
+                            else
+                            {
+                                XtraMessageBox.Show("Error!!!");
+                            }
+
+
+                        }
+
+
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    //this.Dispose();
                 }
 
             }
 
             if (e.Button == windowsUIButtonPanelMain.Buttons[2])
             {
-
-                if (textEditname.Text == "" || textEdit4.Text == "" || numericUpDown1.Text == "" || textEdit1_marque.Text == "" || textEdit3_matricul.Text == "" || listBoxControl1.Items.IndexOf(listBoxControl1.SelectedItem) == -1)
+                try
                 {
-                    MessageBox.Show("champs obligatoires");
-
-                }
-
-                else
-                {
-                    DateTime dt = Convert.ToDateTime(dateEdit1.EditValue);
 
 
-                    string textquery = "insert into [Reaparation]([n/],nom ,[Carburant],[vehecule],[first_kilometrage],[_date])VALUES('" + textEdit1.Text + "','"+ textEditname.Text + "','" + textEdit4.Text + "'," + comboBox1.SelectedValue + ",'" + numericUpDown1.Text + "','" + dt.ToString("yyyy-MM-dd") + "')";
-                    ExecuteQuery(textquery);
-                    if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
-                    Program.sql_cmd = new SqlCommand("SELECT TOP 1 id FROM [Reaparation] ORDER BY id DESC ", Program.sql_con);
-                    string id = "";
-                    Program.db = Program.sql_cmd.ExecuteReader();
-                    if (Program.db.HasRows)
+
+                    if (textEditname.Text == "" || textEdit4.Text == "" || numericUpDown1.Text == "" || textEdit1_marque.Text == "" || textEdit3_matricul.Text == "" || listBoxControl1.Items.IndexOf(listBoxControl1.SelectedItem) == -1)
                     {
-
-
-                        Program.db.Read();
-
-
-                        id = Program.db[0].ToString();
+                        XtraMessageBox.Show("champs obligatoires");
 
                     }
 
-                    if (listBoxControl1.Items.Count != 0)
-                    {
-                        string sql = "INSERT INTO [dbo].[descriptions](_description,id_Reaparation) VALUES(@DESCRIPTION,@id_reparation)";
-
-                        foreach (string _description in listBoxControl1.Items)
-                        {
-                            Program.sql_cmd = new SqlCommand(sql, Program.sql_con);
-                            Program.sql_cmd.Parameters.AddWithValue("@DESCRIPTION", _description);
-                            Program.sql_cmd.Parameters.AddWithValue("@id_reparation", id);
-
-                            if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
-                            Program.sql_cmd.ExecuteNonQuery();
-                            Program.sql_con.Close();
-                        }
-                        toastNotificationsManager1.ShowNotification("1d00270b-1651-4ed4-a139-bd59d5d8cf8e");
-                    }
                     else
                     {
-                        MessageBox.Show("Error!!!");
+
+
+
+                        DateTime dt = Convert.ToDateTime(dateEdit1.EditValue);
+
+                        DateTime dtnow = Convert.ToDateTime(dateEdit1now.EditValue);
+
+
+                        if (idEdit != 0)
+                        //update
+                        {
+                            string textquery2 = "update  [Reaparation] set [n/] = '" + textEdit1.Text + "',nom  = '" + textEditname.Text + "' ,[Carburant] = '" + textEdit4.Text + "'  ,[vehecule] = " + comboBox1.SelectedValue + " ,[first_kilometrage] =  '" + numericUpDown1.Text + "' ,[_date]  = '" + dt.ToString("yyyy-MM-dd") + "' ,[datenow] = '" + dtnow.ToString("yyyy-MM-dd") + "'  where id = " + idEdit + "";
+                            ExecuteQuery(textquery2);
+
+                            string textquery3 = "DELETE  from descriptions where id_Reaparation = " + idEdit + " ";
+                            ExecuteQuery(textquery3);
+
+                            if (listBoxControl1.Items.Count != 0)
+                            {
+                                string sql = "INSERT INTO [dbo].[descriptions](_description,id_Reaparation) VALUES(@DESCRIPTION,@id_reparation)";
+
+                                foreach (string _description in listBoxControl1.Items)
+                                {
+                                    Program.sql_cmd = new SqlCommand(sql, Program.sql_con);
+                                    Program.sql_cmd.Parameters.AddWithValue("@DESCRIPTION", _description);
+                                    Program.sql_cmd.Parameters.AddWithValue("@id_reparation", idEdit);
+
+                                    if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
+                                    Program.sql_cmd.ExecuteNonQuery();
+                                    Program.sql_con.Close();
+                                }
+                                toastNotificationsManager1.ShowNotification("1d00270b-1651-4ed4-a139-bd59d5d8cf8e");
+                                this.Close();
+                            }
+
+                        }
+
+                        else
+                        {
+                            string textquery = "insert into [Reaparation]([n/],nom ,[Carburant],[vehecule],[first_kilometrage],[_date])VALUES('" + textEdit1.Text + "','" + textEditname.Text + "','" + textEdit4.Text + "'," + comboBox1.SelectedValue + ",'" + numericUpDown1.Text + "','" + dt.ToString("yyyy-MM-dd") + "')";
+                            ExecuteQuery(textquery);
+                            if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
+                            Program.sql_cmd = new SqlCommand("SELECT TOP 1 id FROM [Reaparation] ORDER BY id DESC ", Program.sql_con);
+                            string id = "";
+                            Program.db = Program.sql_cmd.ExecuteReader();
+                            if (Program.db.HasRows)
+                            {
+
+
+                                Program.db.Read();
+
+
+                                id = Program.db[0].ToString();
+
+                            }
+
+                            if (listBoxControl1.Items.Count != 0)
+                            {
+                                string sql = "INSERT INTO [dbo].[descriptions](_description,id_Reaparation) VALUES(@DESCRIPTION,@id_reparation)";
+
+                                foreach (string _description in listBoxControl1.Items)
+                                {
+                                    Program.sql_cmd = new SqlCommand(sql, Program.sql_con);
+                                    Program.sql_cmd.Parameters.AddWithValue("@DESCRIPTION", _description);
+                                    Program.sql_cmd.Parameters.AddWithValue("@id_reparation", id);
+
+                                    if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
+                                    Program.sql_cmd.ExecuteNonQuery();
+                                    Program.sql_con.Close();
+                                }
+                                toastNotificationsManager1.ShowNotification("1d00270b-1651-4ed4-a139-bd59d5d8cf8e");
+                            }
+                            else
+                            {
+                                XtraMessageBox.Show("Error!!!");
+                            }
+
+                        }
+
+
+
+                      
+
+                        textEditname.Text = ""; textEdit4.Text = ""; numericUpDown1.Text = ""; textEdit1_marque.Text = ""; textEdit3_matricul.Text = ""; listBoxControl1.Items.Clear();
+                        idEdit = 0;
                     }
-
-                    textEditname.Text = ""; textEdit4.Text = ""; numericUpDown1.Text = ""; textEdit1_marque.Text = ""; textEdit3_matricul.Text = ""; listBoxControl1.Items.Clear();
-
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    //this.Dispose();
                 }
 
             }
@@ -406,6 +626,11 @@ namespace DXApplication1
                 textEditname.Text = ""; textEdit4.Text = ""; numericUpDown1.Text = ""; textEdit1_marque.Text = ""; textEdit3_matricul.Text = ""; listBoxControl1.Items.Clear();
 
             }
+
+        }
+
+        private void labelControl_Click(object sender, EventArgs e)
+        {
 
         }
     }

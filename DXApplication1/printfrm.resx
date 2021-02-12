@@ -118,12 +118,17 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <metadata name="documentViewerRibbonController1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>317, 17</value>
-  </metadata>
-  <metadata name="applicationMenu1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="applicationMenu2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>167, 17</value>
-  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="printfrm.IconOptions.LargeImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAUdEVYdFRpdGxlAFByaW50O1ByaW50ZXI7YuN8OwAAAOVJREFUWEft0EsOgzAMBFAu2EtVHIlF
+        JQ6XeiqQPMNUakJIN1h6C5v4006llL+yxZFscSRbHMkWs3meyxk6T9litg1pivuA+4CmA6JpReOmywFp
+        3oo8owTSY+h9wCfPKIH8OGheTWfue3aUQH4cDt9b5Jn6jRLIj6+g+ygB19ST7qMEXFNPuo8ScE0nYB7N
+        1H2UQH58Bd1HCbimnnQfJeCaoDbcDIigfZRAPFq0CRCP5+snCDcjLPGJ9lHyDZprY+ux8zJbVPsB7tc6
+        iEsOqIn7H+h+QAud49jiSLY4ki2OZIvjlOkN9Q4An4cd8QcAAAAASUVORK5CYII=
+</value>
+  </data>
 </root>
