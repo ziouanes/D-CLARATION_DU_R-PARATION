@@ -437,7 +437,7 @@ namespace DXApplication1
 
 
 
-                            string textquery = "insert into [Reaparation]([n/],nom ,[Carburant],[vehecule],[first_kilometrage],[_date])VALUES('" + textEdit1.Text + "','" + textEditname.Text + "','" + textEdit4.Text + "'," + comboBox1.SelectedValue + ",'" + numericUpDown1.Text + "','" + dt.ToString("yyyy-MM-dd") + "')";
+                            string textquery = "insert into [Reaparation]([n/],nom ,[Carburant],[vehecule],[first_kilometrage],[_date],[datenow])VALUES('" + textEdit1.Text + "','" + textEditname.Text + "','" + textEdit4.Text + "'," + comboBox1.SelectedValue + ",'" + numericUpDown1.Text + "','" + dt.ToString("yyyy-MM-dd") + "' ,'" + dtnow.ToString("yyyy-MM-dd") + "')";
                             ExecuteQuery(textquery);
                             if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
                             Program.sql_cmd = new SqlCommand("SELECT TOP 1 id FROM [Reaparation] ORDER BY id DESC ", Program.sql_con);
@@ -563,7 +563,7 @@ namespace DXApplication1
 
                         else
                         {
-                            string textquery = "insert into [Reaparation]([n/],nom ,[Carburant],[vehecule],[first_kilometrage],[_date])VALUES('" + textEdit1.Text + "','" + textEditname.Text + "','" + textEdit4.Text + "'," + comboBox1.SelectedValue + ",'" + numericUpDown1.Text + "','" + dt.ToString("yyyy-MM-dd") + "')";
+                            string textquery = "insert into [Reaparation]([n/],nom ,[Carburant],[vehecule],[first_kilometrage],[_date],[datenow])VALUES('" + textEdit1.Text + "','" + textEditname.Text + "','" + textEdit4.Text + "'," + comboBox1.SelectedValue + ",'" + numericUpDown1.Text + "','" + dt.ToString("yyyy-MM-dd") + "' ,'" + dtnow.ToString("yyyy-MM-dd") + "')";
                             ExecuteQuery(textquery);
                             if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
                             Program.sql_cmd = new SqlCommand("SELECT TOP 1 id FROM [Reaparation] ORDER BY id DESC ", Program.sql_con);

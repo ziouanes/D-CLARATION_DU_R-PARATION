@@ -234,12 +234,13 @@
             // 
             // barButtonItem3
             // 
-            this.barButtonItem3.Caption = "Printer";
+            this.barButtonItem3.Caption = "Imprimer";
             this.barButtonItem3.Hint = "Printer";
             this.barButtonItem3.Id = 49;
             this.barButtonItem3.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem3.ImageOptions.Image")));
             this.barButtonItem3.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem3.ImageOptions.LargeImage")));
             this.barButtonItem3.Name = "barButtonItem3";
+            this.barButtonItem3.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem3_ItemClick);
             // 
             // barSubItem1
             // 
@@ -660,8 +661,6 @@
             this.gridColumn6.Caption = "date2";
             this.gridColumn6.FieldName = "datenow";
             this.gridColumn6.Name = "gridColumn6";
-            this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 7;
             // 
             // barManager1
             // 

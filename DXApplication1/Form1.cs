@@ -12,6 +12,7 @@ using System.Data.SqlClient;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraGrid.Views.BandedGrid;
 using Microsoft.Win32;
+using DevExpress.XtraPrinting;
 
 
 using Dapper;
@@ -440,6 +441,15 @@ namespace DXApplication1
                 //this.Dispose();
             }
 
+        }
+
+        private void barButtonItem3_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            PrintableComponentLink componentLink = new PrintableComponentLink(new PrintingSystem());
+            componentLink.Component = gridControl1;
+            componentLink.CreateDocument();
+            PrintTool pt = new PrintTool(componentLink.PrintingSystemBase);
+            pt.ShowPreviewDialog();
         }
     }
 }
