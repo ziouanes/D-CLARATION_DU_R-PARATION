@@ -186,6 +186,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons8_statue_of_liberty.ico" />
+    <Content Include="Resources\vidange.sql" />
+    <Content Include="Resources\VIDANGE2.sql" />
     <None Include="Resources\icons8_receipt_32.png" />
     <None Include="Resources\icons8_login_as_user_641.png" />
     <None Include="Resources\icons8_login_as_user_64.png" />
