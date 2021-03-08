@@ -70,7 +70,7 @@ namespace DXApplication1
         {
             try
             {
-                string a = textEdit1.Text;
+                string a = textEdit2.Text;
                 string b = string.Empty;
 
                 for (int i = 0; i < a.Length; i++)
