@@ -31,8 +31,10 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Report_declaration));
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
+            this.xrLabel22 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel21 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel3 = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrLabel2 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrPictureBox1 = new DevExpress.XtraReports.UI.XRPictureBox();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
@@ -92,11 +94,9 @@
             this.xrTableCell11 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell12 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrLabel14 = new DevExpress.XtraReports.UI.XRLabel();
+            this.parameter_datenow = new DevExpress.XtraReports.Parameters.Parameter();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
-            this.parameter_datenow = new DevExpress.XtraReports.Parameters.Parameter();
-            this.xrLabel2 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabel22 = new DevExpress.XtraReports.UI.XRLabel();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
@@ -121,6 +121,18 @@
             this.TopMargin.StylePriority.UseTextAlignment = false;
             this.TopMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             // 
+            // xrLabel22
+            // 
+            this.xrLabel22.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "?parameter_datenow")});
+            this.xrLabel22.LocationFloat = new DevExpress.Utils.PointFloat(10.00007F, 131F);
+            this.xrLabel22.Multiline = true;
+            this.xrLabel22.Name = "xrLabel22";
+            this.xrLabel22.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel22.SizeF = new System.Drawing.SizeF(144.0416F, 22.99998F);
+            this.xrLabel22.Text = "xrLabel22";
+            this.xrLabel22.TextFormatString = "{0:}";
+            // 
             // xrLabel21
             // 
             this.xrLabel21.BackColor = System.Drawing.Color.Silver;
@@ -133,6 +145,7 @@
             this.xrLabel21.SizeF = new System.Drawing.SizeF(144.0416F, 23F);
             this.xrLabel21.StylePriority.UseBackColor = false;
             this.xrLabel21.Text = "xrLabel21";
+            this.xrLabel21.TextFormatString = "{0:dd/mm/yyyy}";
             // 
             // xrLabel3
             // 
@@ -144,6 +157,17 @@
             this.xrLabel3.SizeF = new System.Drawing.SizeF(277.0832F, 23F);
             this.xrLabel3.StylePriority.UseFont = false;
             this.xrLabel3.Text = "DEMANDE DE REPARATION";
+            // 
+            // xrLabel2
+            // 
+            this.xrLabel2.BackColor = System.Drawing.Color.Silver;
+            this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(10.00001F, 130.5F);
+            this.xrLabel2.Multiline = true;
+            this.xrLabel2.Name = "xrLabel2";
+            this.xrLabel2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel2.SizeF = new System.Drawing.SizeF(144.0417F, 23F);
+            this.xrLabel2.StylePriority.UseBackColor = false;
+            this.xrLabel2.TextFormatString = "{0:\'Date:\' dd/MM/yyyy}";
             // 
             // xrLabel1
             // 
@@ -281,7 +305,7 @@
             this.xrLabel17.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrLabel17.SizeF = new System.Drawing.SizeF(184.5001F, 23F);
             this.xrLabel17.Text = "xrLabel17";
-            this.xrLabel17.TextFormatString = "{0:dd/MM/yyyy}";
+            this.xrLabel17.TextFormatString = "{0:}";
             // 
             // xrLabel15
             // 
@@ -760,6 +784,13 @@
             this.xrLabel14.Text = "SIGNATURE ET CACHET DU GARAGE";
             this.xrLabel14.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             // 
+            // parameter_datenow
+            // 
+            this.parameter_datenow.Description = "Parameter1";
+            this.parameter_datenow.Name = "parameter_datenow";
+            this.parameter_datenow.Type = typeof(System.DateTime);
+            this.parameter_datenow.ValueInfo = "2021-02-10";
+            // 
             // bindingSource1
             // 
             this.bindingSource1.DataSource = typeof(DXApplication1.Anticipation);
@@ -768,36 +799,6 @@
             // 
             this.objectDataSource1.DataSource = typeof(DXApplication1.description);
             this.objectDataSource1.Name = "objectDataSource1";
-            // 
-            // parameter_datenow
-            // 
-            this.parameter_datenow.Description = "Parameter1";
-            this.parameter_datenow.Name = "parameter_datenow";
-            this.parameter_datenow.Type = typeof(System.DateTime);
-            this.parameter_datenow.ValueInfo = "2021-02-10";
-            // 
-            // xrLabel2
-            // 
-            this.xrLabel2.BackColor = System.Drawing.Color.Silver;
-            this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(10.00001F, 130.5F);
-            this.xrLabel2.Multiline = true;
-            this.xrLabel2.Name = "xrLabel2";
-            this.xrLabel2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel2.SizeF = new System.Drawing.SizeF(144.0417F, 23F);
-            this.xrLabel2.StylePriority.UseBackColor = false;
-            this.xrLabel2.TextFormatString = "{0:\'Date:\' dd/MM/yyyy}";
-            // 
-            // xrLabel22
-            // 
-            this.xrLabel22.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "?parameter_datenow")});
-            this.xrLabel22.LocationFloat = new DevExpress.Utils.PointFloat(10.00007F, 131F);
-            this.xrLabel22.Multiline = true;
-            this.xrLabel22.Name = "xrLabel22";
-            this.xrLabel22.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
-            this.xrLabel22.SizeF = new System.Drawing.SizeF(144.0416F, 22.99998F);
-            this.xrLabel22.Text = "xrLabel22";
-            this.xrLabel22.TextFormatString = "{0:dd/MM/yyyy}";
             // 
             // Report_declaration
             // 

@@ -32,7 +32,7 @@ namespace DXApplication1
                     sql_con.Open();
                 SqlCommand cmd = sql_con.CreateCommand();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "select r.[n/],r.[nom] , r.[Carburant]  ,v.[Marque] ,v.[matricule]   , r.[first_kilometrage] , r.[_date]  ,r.[datenow] as datenow from [Reaparation] r inner join [vehicules] v on r.vehecule  =v.id  where r.id = " + id_Reaparation + "";
+                cmd.CommandText = "select r.[n/],r.[nom] , r.[Carburant]  ,v.[Marque] ,v.[matricule]   , r.[first_kilometrage] , FORMAT (r.[_date], '*dd/MM/yyyy') as '_date'   ,FORMAT (r.[datenow], '*dd/MM/yyyy') as  'datenow' from [Reaparation] r inner join [vehicules] v on r.vehecule  =v.id  where r.id = " + id_Reaparation + "";
                 DataTable table = new DataTable();
                 cmd.ExecuteNonQuery();
                 SqlDataAdapter ad  = new SqlDataAdapter(cmd);
@@ -62,6 +62,11 @@ namespace DXApplication1
         }
 
         private void printPreviewBarItem8_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
+
+        private void ribbonControl1_Click(object sender, EventArgs e)
         {
 
         }
