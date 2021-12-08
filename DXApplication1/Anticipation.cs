@@ -13,6 +13,7 @@ namespace DXApplication1
         public string Marque { get; set; }
         public string Immatriculation { get; set; }
         public int KILOMÉTRAGE_V { get; set; }
+        public int  P_KILOMÉTRAGE { get; set; }
         public DateTime Date_V { get; set; }
         public int Taux { get; set; }
 

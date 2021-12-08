@@ -16,7 +16,7 @@ namespace DXApplication1
         public string Immatriculation { get; set; }
         public string Carburant { get; set; }
         public DateTime Date { get; set; }
-        public int kilometrage { get; set; }
+        public string kilometrage { get; set; }
         public DateTime datenow { get; set; }
 
 

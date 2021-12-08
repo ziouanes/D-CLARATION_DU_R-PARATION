@@ -16,7 +16,7 @@ namespace DXApplication1
         DateTime dateedit = DateTime.Now;
 
         int idEdit = 0;
-
+        int new_ = 0;
         string st = "";
         public add_new(DateTime date1, string vehicule_id, string marque, string matriculation, string kilomitrage)
         {
@@ -27,6 +27,7 @@ namespace DXApplication1
             dateedit = date1;
             textEdit1_marque.Text = marque;
             textEdit3_matricul.Text = matriculation;
+            new_ = 1;
         }
 
         public add_new(string numero, int id, int id_v, string marque, string matricule, DateTime date, string kilo, string nom, string carb, DateTime cell_newdate)
@@ -43,6 +44,8 @@ namespace DXApplication1
             textEdit4.Text = carb;
             textEdit1.Text = numero;
             datenowedit = cell_newdate;
+           
+
 
             try
             {
@@ -103,6 +106,7 @@ namespace DXApplication1
 
             ExecuteQueryvehecules();
 
+
         }
         private void ExecuteQueryvehecules()
         {
@@ -118,17 +122,29 @@ namespace DXApplication1
                 DataTable dt = new DataTable();
                 Program.ad = new SqlDataAdapter(Program.sql_cmd);
                 Program.ad.Fill(dt);
-                comboBox1.DataSource = dt;
-                comboBox1.ValueMember = "id";
-                comboBox1.DisplayMember = "Vehicule";
+                comboBox1.Properties.DataSource = dt;
+                comboBox1.Properties.ValueMember = "id";
+                comboBox1.Properties.DisplayMember = "Vehicule";
                 //comboBox1.SelectedIndex = -1;
-                if (st != "")
+                if (idEdit != 0)
                 {
-                    comboBox1.SelectedValue = st;
+                   // comboBox1.ItemIndex= -1;
+                   // MessageBox.Show(st);
+                    comboBox1.EditValue = int.Parse(st);
+
+                }
+                if (new_ != 0)
+                {
+                    // comboBox1.ItemIndex= -1;
+                    //MessageBox.Show(st);
+                    comboBox1.EditValue = int.Parse(st);
 
                 }
 
 
+                comboBox1.Properties.PopulateColumns();
+
+                comboBox1.Properties.Columns[0].Visible = false;
 
 
                 Program.sql_con.Close();
@@ -143,7 +159,7 @@ namespace DXApplication1
             }
 
 
-            comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+           // comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             //comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
 
         }
@@ -196,37 +212,7 @@ namespace DXApplication1
 
         private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            try
-            {
-
-                string s = "";
-                if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
-                if (comboBox1.SelectedIndex > -1)
-                {
-                    SqlCommand cmd = Program.sql_con.CreateCommand();
-                    cmd.CommandType = CommandType.Text;
-                    s = comboBox1.SelectedValue.ToString();
-                    cmd.CommandText = "SELECT [Marque] , [matricule] from [dbo].[vehicules] where id =" + s + "";
-                    DataTable table = new DataTable();
-                    cmd.ExecuteNonQuery();
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    da.Fill(table);
-                    foreach (DataRow row in table.Rows)
-                    {
-                        textEdit1_marque.Text = row["Marque"].ToString();
-                        textEdit3_matricul.Text = row["matricule"].ToString();
-                    }
-
-                }
-            }
-            catch (Exception ex)
-            {
-                XtraMessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                //this.Dispose();
-            }
+           
 
         }
 
@@ -289,7 +275,7 @@ namespace DXApplication1
                         if (idEdit != 0)
                         //update
                         {
-                            string textquery2 = "update  [Reaparation] set [n/] = '" + textEdit1.Text + "',nom  = '" + textEditname.Text + "' ,[Carburant] = '" + textEdit4.Text + "'  ,[vehecule] = " + comboBox1.SelectedValue + " ,[first_kilometrage] =  '" + numericUpDown1.Text + "' ,[_date]  = '" + dt.ToString("yyyy-MM-dd") + "' ,[datenow] = '" + dtnow.ToString("yyyy-MM-dd") + "'  where id = " + idEdit + "";
+                            string textquery2 = "update  [Reaparation] set [n/] = '" + textEdit1.Text + "',nom  = '" + textEditname.Text + "' ,[Carburant] = '" + textEdit4.Text + "'  ,[vehecule] = " + comboBox1.EditValue + " ,[first_kilometrage] =  '" + numericUpDown1.Text + "' ,[_date]  = '" + dt.ToString("yyyy-MM-dd") + "' ,[datenow] = '" + dtnow.ToString("yyyy-MM-dd") + "'  where id = " + idEdit + "";
                             ExecuteQuery(textquery2);
 
                             string textquery3 = "DELETE  from descriptions where id_Reaparation = " + idEdit + " ";
@@ -316,7 +302,7 @@ namespace DXApplication1
                         }
                         else
                         {
-                            string textquery = "insert into [Reaparation]([n/],nom ,[Carburant],[vehecule],[first_kilometrage],[_date],[datenow])VALUES('" + textEdit1.Text + "','" + textEditname.Text + "','" + textEdit4.Text + "'," + comboBox1.SelectedValue + ",'" + numericUpDown1.Text + "','" + dt.ToString("yyyy-MM-dd") + "' ,'" + dtnow.ToString("yyyy-MM-dd") + "' )";
+                            string textquery = "insert into [Reaparation]([n/],nom ,[Carburant],[vehecule],[first_kilometrage],[_date],[datenow])VALUES('" + textEdit1.Text + "','" + textEditname.Text + "','" + textEdit4.Text + "'," + comboBox1.EditValue + ",'" + numericUpDown1.Text + "','" + dt.ToString("yyyy-MM-dd") + "' ,'" + dtnow.ToString("yyyy-MM-dd") + "' )";
                             ExecuteQuery(textquery);
                             if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
                             Program.sql_cmd = new SqlCommand("SELECT TOP 1 id FROM [Reaparation] ORDER BY id DESC ", Program.sql_con);
@@ -395,7 +381,7 @@ namespace DXApplication1
                         if (idEdit != 0)
                         //update 
                         {
-                            string textquery2 = "update  [Reaparation] set [n/] = '" + textEdit1.Text + "',nom  = '" + textEditname.Text + "' ,[Carburant] = '" + textEdit4.Text + "'  ,[vehecule] = " + comboBox1.SelectedValue + " ,[first_kilometrage] =  '" + numericUpDown1.Text + "' ,[_date]  = '" + dt.ToString("yyyy-MM-dd") + "' ,[datenow] = '" + dtnow.ToString("yyyy-MM-dd") + "'  where id = " + idEdit + "";
+                            string textquery2 = "update  [Reaparation] set [n/] = '" + textEdit1.Text + "',nom  = '" + textEditname.Text + "' ,[Carburant] = '" + textEdit4.Text + "'  ,[vehecule] = " + comboBox1.EditValue + " ,[first_kilometrage] =  '" + numericUpDown1.Text + "' ,[_date]  = '" + dt.ToString("yyyy-MM-dd") + "' ,[datenow] = '" + dtnow.ToString("yyyy-MM-dd") + "'  where id = " + idEdit + "";
                             ExecuteQuery(textquery2);
 
                             string textquery3 = "DELETE  from descriptions where id_Reaparation = " + idEdit + " ";
@@ -437,7 +423,7 @@ namespace DXApplication1
 
 
 
-                            string textquery = "insert into [Reaparation]([n/],nom ,[Carburant],[vehecule],[first_kilometrage],[_date],[datenow])VALUES('" + textEdit1.Text + "','" + textEditname.Text + "','" + textEdit4.Text + "'," + comboBox1.SelectedValue + ",'" + numericUpDown1.Text + "','" + dt.ToString("yyyy-MM-dd") + "' ,'" + dtnow.ToString("yyyy-MM-dd") + "')";
+                            string textquery = "insert into [Reaparation]([n/],nom ,[Carburant],[vehecule],[first_kilometrage],[_date],[datenow])VALUES('" + textEdit1.Text + "','" + textEditname.Text + "','" + textEdit4.Text + "'," + comboBox1.EditValue + ",'" + numericUpDown1.Text + "','" + dt.ToString("yyyy-MM-dd") + "' ,'" + dtnow.ToString("yyyy-MM-dd") + "')";
                             ExecuteQuery(textquery);
                             if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
                             Program.sql_cmd = new SqlCommand("SELECT TOP 1 id FROM [Reaparation] ORDER BY id DESC ", Program.sql_con);
@@ -535,7 +521,7 @@ namespace DXApplication1
                         if (idEdit != 0)
                         //update
                         {
-                            string textquery2 = "update  [Reaparation] set [n/] = '" + textEdit1.Text + "',nom  = '" + textEditname.Text + "' ,[Carburant] = '" + textEdit4.Text + "'  ,[vehecule] = " + comboBox1.SelectedValue + " ,[first_kilometrage] =  '" + numericUpDown1.Text + "' ,[_date]  = '" + dt.ToString("yyyy-MM-dd") + "' ,[datenow] = '" + dtnow.ToString("yyyy-MM-dd") + "'  where id = " + idEdit + "";
+                            string textquery2 = "update  [Reaparation] set [n/] = '" + textEdit1.Text + "',nom  = '" + textEditname.Text + "' ,[Carburant] = '" + textEdit4.Text + "'  ,[vehecule] = " + comboBox1.EditValue + " ,[first_kilometrage] =  '" + numericUpDown1.Text + "' ,[_date]  = '" + dt.ToString("yyyy-MM-dd") + "' ,[datenow] = '" + dtnow.ToString("yyyy-MM-dd") + "'  where id = " + idEdit + "";
                             ExecuteQuery(textquery2);
 
                             string textquery3 = "DELETE  from descriptions where id_Reaparation = " + idEdit + " ";
@@ -563,7 +549,7 @@ namespace DXApplication1
 
                         else
                         {
-                            string textquery = "insert into [Reaparation]([n/],nom ,[Carburant],[vehecule],[first_kilometrage],[_date],[datenow])VALUES('" + textEdit1.Text + "','" + textEditname.Text + "','" + textEdit4.Text + "'," + comboBox1.SelectedValue + ",'" + numericUpDown1.Text + "','" + dt.ToString("yyyy-MM-dd") + "' ,'" + dtnow.ToString("yyyy-MM-dd") + "')";
+                            string textquery = "insert into [Reaparation]([n/],nom ,[Carburant],[vehecule],[first_kilometrage],[_date],[datenow])VALUES('" + textEdit1.Text + "','" + textEditname.Text + "','" + textEdit4.Text + "'," + comboBox1.EditValue + ",'" + numericUpDown1.Text + "','" + dt.ToString("yyyy-MM-dd") + "' ,'" + dtnow.ToString("yyyy-MM-dd") + "')";
                             ExecuteQuery(textquery);
                             if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
                             Program.sql_cmd = new SqlCommand("SELECT TOP 1 id FROM [Reaparation] ORDER BY id DESC ", Program.sql_con);
@@ -632,6 +618,41 @@ namespace DXApplication1
         private void labelControl_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void comboBox1_EditValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+
+                string s = "";
+                if (Program.sql_con.State == ConnectionState.Closed) Program.sql_con.Open();
+                if (comboBox1.ItemIndex > -1)
+                {
+                    SqlCommand cmd = Program.sql_con.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    s = comboBox1.EditValue.ToString();
+                    cmd.CommandText = "SELECT [Marque] , [matricule] from [dbo].[vehicules] where id =" + s + "";
+                    DataTable table = new DataTable();
+                    cmd.ExecuteNonQuery();
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(table);
+                    foreach (DataRow row in table.Rows)
+                    {
+                        textEdit1_marque.Text = row["Marque"].ToString();
+                        textEdit3_matricul.Text = row["matricule"].ToString();
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                //this.Dispose();
+            }
         }
     }
 }

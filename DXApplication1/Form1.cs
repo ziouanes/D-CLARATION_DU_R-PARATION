@@ -74,7 +74,7 @@ namespace DXApplication1
                 if (sql_con.State == ConnectionState.Closed)
                     sql_con.Open();
 
-                string query = $"select id ,Marque,Immatriculation  ,id_v,  KILOMÉTRAGE_V ,  Date_V ,  Taux  from(select  n.id as id, v.Marque as Marque, v.matricule as Immatriculation, v.id as id_v, n.[KILOMÉTRAGE] as KILOMÉTRAGE_V, n.[DATE] as Date_V, n.[Taux] as Taux,row_number() over(partition by v.id  order by n.[DATE]  desc) as rn from vehicules v inner join [NOUVEAU] n on n.[VEHICULE] = v.id) as T where rn = 1; ";
+                string query = $"  select id ,Marque,Immatriculation  ,id_v, P_KILOMÉTRAGE , KILOMÉTRAGE_V ,  Date_V ,  Taux  from(select  n.id as id, v.Marque as Marque, v.matricule as Immatriculation, v.id as id_v,v.km_V as P_KILOMÉTRAGE , n.[KILOMÉTRAGE] as KILOMÉTRAGE_V, n.[DATE] as Date_V, n.[Taux] as Taux,row_number() over(partition by v.id  order by n.[DATE]  desc) as rn from vehicules v inner join [NOUVEAU] n on n.[VEHICULE] = v.id) as T where rn = 1; ";
                 anticipationBindingSource.DataSource = sql_con.Query<Anticipation>(query, commandType: CommandType.Text);
 
 
@@ -274,8 +274,11 @@ namespace DXApplication1
             string cellid;
             cellid = gridView2.GetRowCellValue(row2, "id").ToString();
 
+            if (MessageBox.Show("Voulez-vous vraiment supprimer cette  Demenade ? ", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
 
-            try { 
+                try
+                { 
 
 
             using (SqlCommand deleteCommand = new SqlCommand("DELETE FROM Reaparation WHERE id = @id", Program.sql_con))
@@ -301,6 +304,10 @@ namespace DXApplication1
             {
                 //this.Dispose();
             }
+
+
+            }
+            
 
 
         }
@@ -410,7 +417,7 @@ namespace DXApplication1
         {
             try
             {
-            Process.Start("C:\\Program Files (x86)\\hamza\\registre_de_carburant\\simpleDatabase7.exe");
+            Process.Start("C:\\Program Files (x86)\\hamza\\Registre de carburant\\simpleDatabase7.exe");
 
             }
             catch (Exception ex)
@@ -429,7 +436,7 @@ namespace DXApplication1
         {
             try
             {
-                Process.Start("C:\\Program Files (x86)\\hamza\\FACTURE_DE_REPARATION\\simpleDatabase7.exe");
+                Process.Start("C:\\Program Files (x86)\\hamza\\Factures\\simpleDatabase7.exe");
 
             }
             catch (Exception ex)

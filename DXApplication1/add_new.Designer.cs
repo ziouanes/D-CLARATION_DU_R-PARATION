@@ -37,10 +37,10 @@
             this.windowsUIButtonPanelMain = new DevExpress.XtraBars.Docking2010.WindowsUIButtonPanel();
             this.labelControl = new DevExpress.XtraEditors.LabelControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.comboBox1 = new DevExpress.XtraEditors.LookUpEdit();
             this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.textEdit1_marque = new DevExpress.XtraEditors.TextEdit();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.add_to_list = new DevExpress.XtraEditors.SimpleButton();
             this.textEdit6 = new DevExpress.XtraEditors.TextEdit();
             this.listBoxControl1 = new DevExpress.XtraEditors.ListBoxControl();
@@ -55,9 +55,9 @@
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             this._date = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -71,6 +71,7 @@
             this.toastNotificationsManager1 = new DevExpress.XtraBars.ToastNotifications.ToastNotificationsManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBox1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1_marque.Properties)).BeginInit();
@@ -89,9 +90,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._date)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
@@ -167,10 +168,10 @@
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.comboBox1);
             this.layoutControl1.Controls.Add(this.textEdit1);
             this.layoutControl1.Controls.Add(this.numericUpDown1);
             this.layoutControl1.Controls.Add(this.textEdit1_marque);
-            this.layoutControl1.Controls.Add(this.comboBox1);
             this.layoutControl1.Controls.Add(this.add_to_list);
             this.layoutControl1.Controls.Add(this.textEdit6);
             this.layoutControl1.Controls.Add(this.listBoxControl1);
@@ -186,6 +187,18 @@
             this.layoutControl1.Size = new System.Drawing.Size(924, 398);
             this.layoutControl1.TabIndex = 6;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.Location = new System.Drawing.Point(116, 104);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.comboBox1.Properties.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.AutoSearch;
+            this.comboBox1.Size = new System.Drawing.Size(321, 20);
+            this.comboBox1.StyleController = this.layoutControl1;
+            this.comboBox1.TabIndex = 19;
+            this.comboBox1.EditValueChanged += new System.EventHandler(this.comboBox1_EditValueChanged);
             // 
             // textEdit1
             // 
@@ -209,21 +222,12 @@
             // 
             // textEdit1_marque
             // 
-            this.textEdit1_marque.Location = new System.Drawing.Point(116, 129);
+            this.textEdit1_marque.Location = new System.Drawing.Point(116, 128);
             this.textEdit1_marque.Name = "textEdit1_marque";
             this.textEdit1_marque.Properties.ReadOnly = true;
             this.textEdit1_marque.Size = new System.Drawing.Size(321, 20);
             this.textEdit1_marque.StyleController = this.layoutControl1;
             this.textEdit1_marque.TabIndex = 16;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(116, 104);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(321, 21);
-            this.comboBox1.TabIndex = 15;
-            this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.comboBox1_SelectionChangeCommitted);
             // 
             // add_to_list
             // 
@@ -236,7 +240,7 @@
             this.add_to_list.AppearanceDisabled.Options.UseBorderColor = true;
             this.add_to_list.AppearanceDisabled.Options.UseFont = true;
             this.add_to_list.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("add_to_list.ImageOptions.Image")));
-            this.add_to_list.Location = new System.Drawing.Point(136, 270);
+            this.add_to_list.Location = new System.Drawing.Point(136, 269);
             this.add_to_list.Name = "add_to_list";
             this.add_to_list.Size = new System.Drawing.Size(184, 22);
             this.add_to_list.StyleController = this.layoutControl1;
@@ -246,7 +250,7 @@
             // 
             // textEdit6
             // 
-            this.textEdit6.Location = new System.Drawing.Point(116, 246);
+            this.textEdit6.Location = new System.Drawing.Point(116, 245);
             this.textEdit6.Name = "textEdit6";
             this.textEdit6.Size = new System.Drawing.Size(309, 20);
             this.textEdit6.StyleController = this.layoutControl1;
@@ -255,9 +259,9 @@
             // 
             // listBoxControl1
             // 
-            this.listBoxControl1.Location = new System.Drawing.Point(429, 246);
+            this.listBoxControl1.Location = new System.Drawing.Point(429, 245);
             this.listBoxControl1.Name = "listBoxControl1";
-            this.listBoxControl1.Size = new System.Drawing.Size(459, 116);
+            this.listBoxControl1.Size = new System.Drawing.Size(459, 117);
             this.listBoxControl1.StyleController = this.layoutControl1;
             this.listBoxControl1.TabIndex = 10;
             this.listBoxControl1.MeasureItem += new System.Windows.Forms.MeasureItemEventHandler(this.listBoxControl1_MeasureItem);
@@ -273,7 +277,7 @@
             // 
             // textEdit3_matricul
             // 
-            this.textEdit3_matricul.Location = new System.Drawing.Point(116, 153);
+            this.textEdit3_matricul.Location = new System.Drawing.Point(116, 152);
             this.textEdit3_matricul.Name = "textEdit3_matricul";
             this.textEdit3_matricul.Properties.ReadOnly = true;
             this.textEdit3_matricul.Size = new System.Drawing.Size(321, 20);
@@ -291,7 +295,7 @@
             // dateEdit1
             // 
             this.dateEdit1.EditValue = new System.DateTime(2021, 2, 2, 12, 24, 38, 0);
-            this.dateEdit1.Location = new System.Drawing.Point(104, 189);
+            this.dateEdit1.Location = new System.Drawing.Point(104, 188);
             this.dateEdit1.Name = "dateEdit1";
             this.dateEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -353,18 +357,18 @@
             this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem3,
             this.layoutControlItem4,
-            this.layoutControlItem9,
             this.layoutControlItem2,
-            this.layoutControlItem7});
+            this.layoutControlItem7,
+            this.layoutControlItem10});
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 24);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
-            this.layoutControlGroup2.Size = new System.Drawing.Size(880, 118);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(880, 117);
             this.layoutControlGroup2.Text = "VEHICULE";
             // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.textEdit3_matricul;
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 49);
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 48);
             this.layoutControlItem3.Name = "layoutControlItem3";
             this.layoutControlItem3.Size = new System.Drawing.Size(405, 24);
             this.layoutControlItem3.Text = "Immatriculation:";
@@ -382,19 +386,10 @@
             this.layoutControlItem4.Text = "Carburant:";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(77, 13);
             // 
-            // layoutControlItem9
-            // 
-            this.layoutControlItem9.Control = this.comboBox1;
-            this.layoutControlItem9.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(405, 25);
-            this.layoutControlItem9.Text = "Vehicule:";
-            this.layoutControlItem9.TextSize = new System.Drawing.Size(77, 13);
-            // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.textEdit1_marque;
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 25);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 24);
             this.layoutControlItem2.Name = "layoutControlItem2";
             this.layoutControlItem2.Size = new System.Drawing.Size(405, 24);
             this.layoutControlItem2.Text = "Marque : ";
@@ -405,14 +400,23 @@
             this.layoutControlItem7.Control = this.numericUpDown1;
             this.layoutControlItem7.Location = new System.Drawing.Point(405, 24);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(451, 49);
+            this.layoutControlItem7.Size = new System.Drawing.Size(451, 48);
             this.layoutControlItem7.Text = "Kilometrage:";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(77, 13);
+            // 
+            // layoutControlItem10
+            // 
+            this.layoutControlItem10.Control = this.comboBox1;
+            this.layoutControlItem10.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem10.Name = "layoutControlItem10";
+            this.layoutControlItem10.Size = new System.Drawing.Size(405, 24);
+            this.layoutControlItem10.Text = "Vehicule";
+            this.layoutControlItem10.TextSize = new System.Drawing.Size(77, 13);
             // 
             // _date
             // 
             this._date.Control = this.dateEdit1;
-            this._date.Location = new System.Drawing.Point(0, 142);
+            this._date.Location = new System.Drawing.Point(0, 141);
             this._date.Name = "_date";
             this._date.Size = new System.Drawing.Size(880, 24);
             this._date.Text = "date : ";
@@ -426,9 +430,9 @@
             this.description,
             this.layoutControlItem8,
             this.emptySpaceItem2});
-            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 166);
+            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 165);
             this.layoutControlGroup3.Name = "layoutControlGroup3";
-            this.layoutControlGroup3.Size = new System.Drawing.Size(880, 165);
+            this.layoutControlGroup3.Size = new System.Drawing.Size(880, 166);
             this.layoutControlGroup3.Text = "DESCRIPTION DES REPARATIONS";
             // 
             // layoutControlItem6
@@ -436,7 +440,7 @@
             this.layoutControlItem6.Control = this.listBoxControl1;
             this.layoutControlItem6.Location = new System.Drawing.Point(393, 0);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(463, 120);
+            this.layoutControlItem6.Size = new System.Drawing.Size(463, 121);
             this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem6.TextVisible = false;
             // 
@@ -445,7 +449,7 @@
             this.emptySpaceItem1.AllowHotTrack = false;
             this.emptySpaceItem1.Location = new System.Drawing.Point(288, 24);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(105, 96);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(105, 97);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // description
@@ -461,7 +465,7 @@
             this.layoutControlItem8.Control = this.add_to_list;
             this.layoutControlItem8.Location = new System.Drawing.Point(100, 24);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(188, 96);
+            this.layoutControlItem8.Size = new System.Drawing.Size(188, 97);
             this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem8.TextVisible = false;
             // 
@@ -470,7 +474,7 @@
             this.emptySpaceItem2.AllowHotTrack = false;
             this.emptySpaceItem2.Location = new System.Drawing.Point(0, 24);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(100, 96);
+            this.emptySpaceItem2.Size = new System.Drawing.Size(100, 97);
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
             // _datenow
@@ -526,6 +530,7 @@
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.add_new_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.comboBox1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1_marque.Properties)).EndInit();
@@ -544,9 +549,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._date)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
@@ -586,8 +591,6 @@
         private DevExpress.XtraLayout.LayoutControlItem description;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
         private DevExpress.XtraEditors.TextEdit textEdit1_marque;
         private DevExpress.XtraEditors.TextEdit textEdit3_matricul;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
@@ -599,5 +602,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private DevExpress.XtraEditors.DateEdit dateEdit1now;
         private DevExpress.XtraLayout.LayoutControlItem _datenow;
+        private DevExpress.XtraEditors.LookUpEdit comboBox1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
     }
 }

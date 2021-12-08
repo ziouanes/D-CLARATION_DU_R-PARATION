@@ -78,6 +78,7 @@
             this.colTaux = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemProgressBar1 = new DevExpress.XtraEditors.Repository.RepositoryItemProgressBar();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.customersNavigationPage = new DevExpress.XtraBars.Navigation.NavigationPage();
             this.gridControl2 = new DevExpress.XtraGrid.GridControl();
             this.reaparationBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -485,7 +486,8 @@
             this.colKILOMÉTRAGE_V,
             this.colDate_V,
             this.colTaux,
-            this.gridColumn2});
+            this.gridColumn2,
+            this.gridColumn7});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.Editable = false;
@@ -518,7 +520,7 @@
             this.colKILOMÉTRAGE_V.FieldName = "KILOMÉTRAGE_V";
             this.colKILOMÉTRAGE_V.Name = "colKILOMÉTRAGE_V";
             this.colKILOMÉTRAGE_V.Visible = true;
-            this.colKILOMÉTRAGE_V.VisibleIndex = 2;
+            this.colKILOMÉTRAGE_V.VisibleIndex = 3;
             // 
             // colDate_V
             // 
@@ -526,7 +528,7 @@
             this.colDate_V.FieldName = "Date_V";
             this.colDate_V.Name = "colDate_V";
             this.colDate_V.Visible = true;
-            this.colDate_V.VisibleIndex = 3;
+            this.colDate_V.VisibleIndex = 4;
             // 
             // colTaux
             // 
@@ -534,7 +536,7 @@
             this.colTaux.FieldName = "Taux";
             this.colTaux.Name = "colTaux";
             this.colTaux.Visible = true;
-            this.colTaux.VisibleIndex = 4;
+            this.colTaux.VisibleIndex = 5;
             // 
             // repositoryItemProgressBar1
             // 
@@ -548,6 +550,14 @@
             this.gridColumn2.Caption = "gridColumn2";
             this.gridColumn2.FieldName = "id_v";
             this.gridColumn2.Name = "gridColumn2";
+            // 
+            // gridColumn7
+            // 
+            this.gridColumn7.Caption = "D KILOMÉTRAGE";
+            this.gridColumn7.FieldName = "P_KILOMÉTRAGE";
+            this.gridColumn7.Name = "gridColumn7";
+            this.gridColumn7.Visible = true;
+            this.gridColumn7.VisibleIndex = 2;
             // 
             // customersNavigationPage
             // 
@@ -916,5 +926,6 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItem10;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private System.Windows.Forms.BindingSource reaparationBindingSource;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
     }
 }
