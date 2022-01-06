@@ -18,7 +18,9 @@ namespace DXApplication1
         public DateTime Date { get; set; }
         public string kilometrage { get; set; }
         public DateTime datenow { get; set; }
+        public int année { get; set; }
 
+        
 
     }
 }

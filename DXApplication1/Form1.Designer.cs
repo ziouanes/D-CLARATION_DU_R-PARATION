@@ -81,18 +81,20 @@
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.customersNavigationPage = new DevExpress.XtraBars.Navigation.NavigationPage();
             this.gridControl2 = new DevExpress.XtraGrid.GridControl();
-            this.reaparationBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.reaparationBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colid = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colnumero = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colNom = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colid_vehecule = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colMarque1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colImmatriculation1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCarburant = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colfirst_kilometrage = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colkilometrage = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.coldatenow = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colannée = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.reaparationBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
@@ -125,8 +127,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemProgressBar1)).BeginInit();
             this.customersNavigationPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.reaparationBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.reaparationBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.reaparationBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.toastNotificationsManager1)).BeginInit();
@@ -567,7 +570,7 @@
             // 
             // gridControl2
             // 
-            this.gridControl2.DataSource = this.reaparationBindingSource;
+            this.gridControl2.DataSource = this.reaparationBindingSource1;
             this.gridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControl2.Location = new System.Drawing.Point(0, 0);
             this.gridControl2.MainView = this.gridView2;
@@ -578,35 +581,44 @@
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
             // 
-            // reaparationBindingSource
+            // reaparationBindingSource1
             // 
-            this.reaparationBindingSource.DataSource = typeof(DXApplication1.Reaparation);
+            this.reaparationBindingSource1.DataSource = typeof(DXApplication1.Reaparation);
             // 
             // gridView2
             // 
             this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn5,
+            this.colid,
+            this.colnumero,
             this.colNom,
+            this.colid_vehecule,
             this.colMarque1,
             this.colImmatriculation1,
             this.colCarburant,
             this.colDate,
-            this.colfirst_kilometrage,
-            this.gridColumn3,
-            this.gridColumn4,
-            this.gridColumn6});
+            this.colkilometrage,
+            this.coldatenow,
+            this.colannée});
             this.gridView2.GridControl = this.gridControl2;
+            this.gridView2.GroupCount = 1;
             this.gridView2.Name = "gridView2";
+            this.gridView2.OptionsBehavior.AutoExpandAllGroups = true;
             this.gridView2.OptionsBehavior.Editable = false;
+            this.gridView2.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.colannée, DevExpress.Data.ColumnSortOrder.Descending)});
             this.gridView2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gridView2_MouseUp);
             // 
-            // gridColumn5
+            // colid
             // 
-            this.gridColumn5.Caption = "Numero";
-            this.gridColumn5.FieldName = "numero";
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 0;
+            this.colid.FieldName = "id";
+            this.colid.Name = "colid";
+            // 
+            // colnumero
+            // 
+            this.colnumero.FieldName = "numero";
+            this.colnumero.Name = "colnumero";
+            this.colnumero.Visible = true;
+            this.colnumero.VisibleIndex = 0;
             // 
             // colNom
             // 
@@ -614,6 +626,11 @@
             this.colNom.Name = "colNom";
             this.colNom.Visible = true;
             this.colNom.VisibleIndex = 1;
+            // 
+            // colid_vehecule
+            // 
+            this.colid_vehecule.FieldName = "id_vehecule";
+            this.colid_vehecule.Name = "colid_vehecule";
             // 
             // colMarque1
             // 
@@ -643,34 +660,28 @@
             this.colDate.Visible = true;
             this.colDate.VisibleIndex = 5;
             // 
-            // colfirst_kilometrage
+            // colkilometrage
             // 
-            this.colfirst_kilometrage.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.colfirst_kilometrage.AppearanceCell.Options.UseFont = true;
-            this.colfirst_kilometrage.AppearanceCell.Options.UseTextOptions = true;
-            this.colfirst_kilometrage.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.colfirst_kilometrage.FieldName = "kilometrage";
-            this.colfirst_kilometrage.Name = "colfirst_kilometrage";
-            this.colfirst_kilometrage.Visible = true;
-            this.colfirst_kilometrage.VisibleIndex = 6;
+            this.colkilometrage.FieldName = "kilometrage";
+            this.colkilometrage.Name = "colkilometrage";
+            this.colkilometrage.Visible = true;
+            this.colkilometrage.VisibleIndex = 6;
             // 
-            // gridColumn3
+            // coldatenow
             // 
-            this.gridColumn3.Caption = "id";
-            this.gridColumn3.FieldName = "id";
-            this.gridColumn3.Name = "gridColumn3";
+            this.coldatenow.FieldName = "datenow";
+            this.coldatenow.Name = "coldatenow";
             // 
-            // gridColumn4
+            // colannée
             // 
-            this.gridColumn4.Caption = "id_V";
-            this.gridColumn4.FieldName = "id_vehecule";
-            this.gridColumn4.Name = "gridColumn4";
+            this.colannée.FieldName = "année";
+            this.colannée.Name = "colannée";
+            this.colannée.Visible = true;
+            this.colannée.VisibleIndex = 7;
             // 
-            // gridColumn6
+            // reaparationBindingSource
             // 
-            this.gridColumn6.Caption = "date2";
-            this.gridColumn6.FieldName = "datenow";
-            this.gridColumn6.Name = "gridColumn6";
+            this.reaparationBindingSource.DataSource = typeof(DXApplication1.Reaparation);
             // 
             // barManager1
             // 
@@ -834,8 +845,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemProgressBar1)).EndInit();
             this.customersNavigationPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.reaparationBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.reaparationBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.reaparationBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.toastNotificationsManager1)).EndInit();
@@ -893,12 +905,6 @@
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
-        private DevExpress.XtraGrid.Columns.GridColumn colNom;
-        private DevExpress.XtraGrid.Columns.GridColumn colMarque1;
-        private DevExpress.XtraGrid.Columns.GridColumn colImmatriculation1;
-        private DevExpress.XtraGrid.Columns.GridColumn colCarburant;
-        private DevExpress.XtraGrid.Columns.GridColumn colDate;
-        private DevExpress.XtraGrid.Columns.GridColumn colfirst_kilometrage;
         private DevExpress.Utils.Behaviors.BehaviorManager behaviorManager1;
         private DevExpress.XtraBars.BarButtonItem ajouter_car;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
@@ -913,9 +919,6 @@
         private DevExpress.XtraBars.PopupMenu popupMenu2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private System.Windows.Forms.Timer timer1;
         private DevExpress.XtraBars.BarLinkContainerItem links;
         private DevExpress.XtraBars.BarButtonItem barButtonItem6;
@@ -924,8 +927,19 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup3;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup4;
         private DevExpress.XtraBars.BarButtonItem barButtonItem10;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private System.Windows.Forms.BindingSource reaparationBindingSource;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
+        private System.Windows.Forms.BindingSource reaparationBindingSource1;
+        private DevExpress.XtraGrid.Columns.GridColumn colid;
+        private DevExpress.XtraGrid.Columns.GridColumn colnumero;
+        private DevExpress.XtraGrid.Columns.GridColumn colNom;
+        private DevExpress.XtraGrid.Columns.GridColumn colid_vehecule;
+        private DevExpress.XtraGrid.Columns.GridColumn colMarque1;
+        private DevExpress.XtraGrid.Columns.GridColumn colImmatriculation1;
+        private DevExpress.XtraGrid.Columns.GridColumn colCarburant;
+        private DevExpress.XtraGrid.Columns.GridColumn colDate;
+        private DevExpress.XtraGrid.Columns.GridColumn colkilometrage;
+        private DevExpress.XtraGrid.Columns.GridColumn coldatenow;
+        private DevExpress.XtraGrid.Columns.GridColumn colannée;
     }
 }

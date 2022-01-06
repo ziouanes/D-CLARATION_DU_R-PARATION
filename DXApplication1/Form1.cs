@@ -104,9 +104,9 @@ namespace DXApplication1
                 if (sql_con.State == ConnectionState.Closed)
                     sql_con.Open();
 
-                string query = $"select r.[n/] as numero , r.id ,r.[nom] as 'Nom',r.[Carburant] as Carburant ,r.[first_kilometrage] as kilometrage,v.Marque as Marque,v.matricule as Immatriculation , v.id as id_vehecule ,r.[_date] as 'Date' , r.[datenow] as datenow from [Reaparation] r inner join vehicules v on r.vehecule = v.id order by r.[_date] DESC";
+                string query = $"select r.[n/] as numero , r.id ,r.[nom] as 'Nom',r.[Carburant] as Carburant ,r.[first_kilometrage] as kilometrage,v.Marque as Marque,v.matricule as Immatriculation , v.id as id_vehecule ,r.[_date] as 'Date' ,YEAR(r.[_date]) as 'année', r.[datenow] as datenow from [Reaparation] r inner join vehicules v on r.vehecule = v.id order by r.[_date] DESC";
 
-                reaparationBindingSource.DataSource = sql_con.Query<Reaparation>(query, commandType: CommandType.Text);
+                reaparationBindingSource1.DataSource = sql_con.Query<Reaparation>(query, commandType: CommandType.Text);
 
 
             }
